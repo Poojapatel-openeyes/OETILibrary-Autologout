@@ -1,0 +1,177 @@
+<div class="grey_content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-sm-12 col-md-offset-2">
+	  <div class="row">
+		<div class="col-md-12 col-sm-12">
+		 <h1 class="pull-left">{{header}} License Pack</h1>
+            <div class="alert alert-{{globals.type}}" role="alert" *ngIf="globals.msgflag">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+          {{globals.message}}
+          </div>
+			 <div class="btn-group pull-right add-right">
+                      <a routerLink="/license-pack/list" class="btn btn-danger btn-add">
+                      <i class="fa fa-reply fa-fw"></i> Back
+                      </a>
+                </div>
+		</div>
+         </div>
+         
+        <div class="white_box">
+             
+                <div class="clearfix"></div>
+                          <form role="form" #LicensePackForm="ngForm" (ngSubmit)="addLicensePack(LicensePackForm)">
+                            
+                            <div class="row">
+                              <div class="col-md-6 col-sm-12 col-xs-12">
+                                  <div class="form-group">
+                              <label><span>*</span>License Pack</label>
+                                <input type="text" class="form-control" #Name="ngModel" [(ngModel)]="LicensePackEntity.Name" class="form-control" maxlength="25" name="Name" [ngClass]="{red_border: (Name.dirty && Name.invalid) || (Name.pristine && submitted)}" required>
+                                <span class="error_span" *ngIf="(Name.dirty && Name.invalid) || (Name.pristine && submitted)"> 
+                                <span *ngIf="Name.errors.required || (Name.pristine && submitted)">Please enter License Pack</span>
+                                <span class="error_span" *ngIf="Name.errors && Name.errors.pattern">
+                                  Please enter valid License Pack
+                                </span>
+                                </span>
+                                </div>
+                                </div>
+
+                                <div class="col-md-6 col-sm-12 col-xs-12">
+                                  <div class="form-group">
+                                  <label><span>*</span>License Pack Type</label>
+                                 <select class='select-option' required #LicensePackType="ngModel" [(ngModel)]="LicensePackEntity.LicensePackType" name="LicensePackType" [ngClass]="{red_border: (LicensePackType.dirty && LicensePackType.invalid) || (LicensePackType.pristine && submitted)}" required>
+              <option value="" ngSelected='LicensePackEntity.LicensePackType==""'></option>
+              <ng-container *ngFor="let DType of LicenceTypeList">
+                <option *ngIf="(DType.IsActive==1 && LicensePackEntity.LicensePackType==0)||((DType.IsActive==1 || LicensePackEntity.LicensePackType==DType.ConfigurationId) && LicensePackEntity.LicensePackType>0)" value="{{DType.ConfigurationId}}" ngSelected="LicensePackEntity.LicensePackType==DType.ConfigurationId">{{DType.Value}}</option>
+              </ng-container> 
+            </select>
+          <span class="error_span"  *ngIf="(LicensePackType.dirty && LicensePackType.invalid) || (LicensePackType.pristine && submitted)"> 
+              <span *ngIf="LicensePackType.errors.required || (LicensePackType.pristine && submitted)">Please select License Pack Type </span>
+            </span>
+                              </div>
+                              </div>
+          <div class="clearfix"></div>
+
+<div class="col-md-6 col-sm-12 col-xs-12">
+  <div class="form-group">
+  <label><span>*</span>No Of License</label>
+<input type="text" class="form-control" #NoOfLicense="ngModel" [(ngModel)]="LicensePackEntity.NoOfLicense" class="form-control" name="NoOfLicense" maxlength="8"pattern="[0-9]{1,8}" 
+[ngClass]="{red_border: (NoOfLicense.dirty && NoOfLicense.invalid) || (NoOfLicense.pristine && submitted)}" required>
+<span class="error_span" *ngIf="(NoOfLicense.dirty && NoOfLicense.invalid) || (NoOfLicense.pristine && submitted)"> 
+<span *ngIf="NoOfLicense.errors.required || (NoOfLicense.pristine && submitted)">Please enter No Of License</span>
+</span>
+<span class="error_span" *ngIf="NoOfLicense.errors && NoOfLicense.errors.pattern">
+Please enter valid No Of License
+</span>
+</div>
+</div>
+
+<div class="col-md-6 col-sm-12 col-xs-12">
+  <div class="form-group">
+  <label><span>*</span>Price</label>
+<input type="text" class="form-control" #Price="ngModel" [(ngModel)]="LicensePackEntity.Price" class="form-control" name="Price" pattern="^\d+(\.\d{1,2})?$" maxlength="7" 
+[ngClass]="{red_border: (Price.dirty && Price.invalid) || (Price.pristine && submitted)}" required>
+<span class="error_span" *ngIf="(Price.dirty && Price.invalid) || (Price.pristine && submitted)"> 
+<span *ngIf="Price.errors.required || (Price.pristine && submitted)">Please enter Price</span>
+</span>
+<span class="error_span" *ngIf="Price.errors && Price.errors.pattern">
+Please enter valid Price
+</span>
+</div>
+</div>
+<div class="clearfix"></div>
+<div class="col-md-6 col-sm-12 col-xs-12">
+  <div class="form-group">
+  <label>Description</label>
+    <textarea class="form-control" #Description="ngModel" [(ngModel)]="LicensePackEntity.Description" class="form-control" maxlength="2000" name="Description" 
+     ></textarea>
+    
+    </div>
+    </div>
+<div class="col-md-6 col-sm-12 col-xs-12">
+  <div class="form-group">
+                                  <label>Validity (In Days)</label>
+            <input type="text" class="form-control" #Validity="ngModel" [(ngModel)]="LicensePackEntity.Validity" class="form-control" name="Validity" maxlength="4" 
+             >
+           
+                              </div>
+                              </div>
+          <div class="clearfix"></div>
+                              <div class="col-md-6 col-sm-12 col-xs-12">
+                                <div class="form-group1">
+                                  <label><span>*</span>Active?</label>
+            <div class="radiobtn_box">
+              <input type="radio"  name="IsActive" id="role1" value="1" #IsActive="ngModel" [(ngModel)]="LicensePackEntity.IsActive" required/>
+              <label for="role1">Yes</label>
+            </div>
+            
+            <div class="radiobtn_box" *ngIf="LicensePackEntity.LicensePackId==0 || LicensePackEntity.isdisabled==0">
+              <input type="radio"   [disabled]="LicensePackEntity.isdisabled>0" name="IsActive" id="role2" value="0" #IsActive="ngModel" [(ngModel)]="LicensePackEntity.IsActive" required/>
+              <label for="role2">No </label>
+              </div>
+              <div class="inline_btn tooltip_inline"  data-toggle="tooltip" data-placement="bottom" title="You can’t deactivate License Pack as it has been already purchased by client" > 
+              <div class="radiobtn_box" *ngIf="LicensePackEntity.LicensePackId>0 && LicensePackEntity.isdisabled>0"    >
+                <input type="radio"    [disabled]="LicensePackEntity.isdisabled>0" name="IsActive" id="role2" value="0" #IsActive="ngModel" [(ngModel)]="LicensePackEntity.IsActive" required/>
+                 <label for="role2">No </label>
+               
+               </div>
+              </div>
+            
+            
+            <!-- <span class="error_span" *ngIf="(IsActive.dirty && IsActive.invalid) || (IsActive.pristine && submitted)"> 
+              <span *ngIf="IsActive.errors.required || (IsActive.pristine && submitted)">Please select Active Status</span>
+              </span> -->
+
+          </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group">
+            <label>Discount</label>
+           <select class='select-option' (change)="changeDiscount()" #DiscountId="ngModel" [(ngModel)]="LicensePackEntity.DiscountId" name="DiscountId">
+<option value="" ngSelected='LicensePackEntity.DiscountId==""'></option>
+<option value="0" ngSelected='LicensePackEntity.DiscountId=="0"'>Select</option>
+<ng-container *ngFor="let DType of DiscountList">
+<option *ngIf="(DType.IsActive==1 && LicensePackEntity.DiscountId==0)||((DType.IsActive==1 || LicensePackEntity.DiscountId==DType.DiscountId) && LicensePackEntity.DiscountId>0)" value="{{DType.DiscountId}}" ngSelected="LicensePackEntity.LicensePackType==DType.DiscountId"> {{DType.Name}} - {{DType.Value}}</option>
+</ng-container> 
+</select>
+
+        </div>
+        </div>
+        <div class="col-md-3 col-sm-12 col-xs-12" *ngIf="LicensePackEntity.DiscountId>0">
+          <div class="form-group">
+                                          <label><span>*</span>Discount Start Date</label>
+                    <input type="text" data-date-format="mm/dd/yyyy" data-link-format="mm/dd/yyyy" readonly class="form-control form_date" #StartDate="ngModel" [(ngModel)]="LicensePackEntity.StartDate" name="StartDate" id="StartDate" pattern="[0-9/.\- ]{1,11}" [ngClass]="{red_border: StartDateValid}" required>
+                   
+                    <span class="error_span" *ngIf="StartDateValid">
+                      Please enter Start Date
+                    </span>
+                                      </div>
+                                      </div>
+                    <div class="col-md-3 col-sm-12 col-xs-12" *ngIf="LicensePackEntity.DiscountId>0">
+                      <div class="form-group">
+                                                      <label><span>*</span>Discount End Date</label>
+
+                                                     
+                                <input type="text" data-date-format="mm/dd/yyyy" data-link-format="mm/dd/yyyy" readonly class="form_date form-control " #EndDate="ngModel" [(ngModel)]="LicensePackEntity.EndDate" name="EndDate" id="EndDate" pattern="[0-9/.\- ]{1,11}" [ngClass]="{red_border: EndDateValid}" required>
+                               
+                                <span class="error_span" *ngIf="EndDateValid">
+                                  Please enter End Date
+                                </span>
+                                                  </div>
+                                                  </div>
+          <div class="clearfix"></div>
+          <div class="text-center">
+            <button type="submit" [disabled]="btn_disable" class="next_btn"><span>Submit</span></button>
+            <button type="button" *ngIf="LicensePackEntity.LicensePackId==0" (click)="clearForm(LicensePackForm)" class="back_btn"><span>Clear</span></button>
+          </div>
+          </div>
+        </form>
+      </div>
+      </div>
+      <!--</div>-->
+      </div>
+      <!-- End Form Elements -->
+      </div>
+      </div>
+      <div class="clearfix"></div>

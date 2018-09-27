@@ -1,0 +1,56 @@
+<div class="grey_content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-sm-12 col-md-offset-2">
+        <h1>License Pack Purchase Report</h1>
+          <div class="alert alert-{{globals.type}}" role="alert" *ngIf="globals.msgflag">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+            {{globals.message}}
+          </div>
+        <div class="white_box">
+     
+          <table id="list_tables" class="table table-hover" style="width:100%">
+            <thead>
+              <tr>
+								<th class="tbl1_width">No.</th>
+								<th>License Pack</th>
+								<th>License Pack Type</th>
+								<th>Client Name</th>
+								<th>Purchase Date</th>
+							  </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let purchase of PurchaseList; let i=index;">
+									<td>{{i+1}}</td>
+									<td>{{purchase.Name}}</td>
+									<td>{{purchase.Value}}</td>
+									<td>{{purchase.FirstName}} {{purchase.LastName}}</td>
+									<td>{{purchase.CreatedOn | date:'MM/dd/yyyy'}}</td>
+								</tr>
+                    <tr *ngIf="PurchaseList.length<=0">
+                      <td colspan="6" class="text-center">There is no record found</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      <div class="clearfix"></div>
+
+<!-- Model -->
+<!-- <div class="modal fade bs-example-modal-sm"  id="Delete_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>Are You Sure You Want To Remove This Placeholder?</p>
+              </div>
+              <div class="modal-footer text-center">
+                <button type="button" class="next_btn" (click)="deleteConfirm(deleteEntity)" id="yes_btn"><span>Yes</span></button>
+                <button type="button" class="back_btn" data-dismiss="modal"><span>No</span></button>
+            </div>
+        </div>
+    </div>
+  </div> -->

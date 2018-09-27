@@ -1,0 +1,181 @@
+<div class="grey_content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-sm-10 col-md-offset-2">
+	  <div class="row">
+		<div class="col-md-12 col-sm-12">
+		 <h1 class="pull-left">{{header}} Email Template</h1>
+			 <div class="btn-group pull-right add-right">
+                <a routerLink="/emailtemplate/list" class="btn btn-danger btn-add">
+                <i class="fa fa-reply fa-fw"></i> Back
+                </a>
+              </div>
+		</div>
+         </div>
+	  
+	  
+	  
+        <div class="white_box">
+           
+              <div class="clearfix"></div>
+              <form #EmailForm="ngForm" (ngSubmit)="addEmailTemplate(EmailForm)">
+                <div class="row">
+                  <div class="col-md-6 col-sm-12 col-xs-12">
+                    <div class="form-group">
+                    <label>
+                    <span>*</span>Email Token</label>
+                    <select #TokenId="ngModel" [(ngModel)]="emailEntity.TokenId" name="TokenId" [ngClass]="{red_border: (TokenId.dirty && TokenId.invalid) || (TokenId.pristine && submitted)}" required>
+                      <option value="" ngSelected='emailEntity.TokenId==""'></option>
+                      <option *ngFor="let token of tokenList" value="{{token.TokenId}}" ngSelected="emailEntity.TokenId==token.TokenId">{{token.DisplayText}}</option>
+
+                      <!-- <option value="Change Password" ngSelected="emailEntity.TokenId=='Registration'">Change Password</option>
+                      <option value="Complete Assessment" ngSelected="emailEntity.TokenId=='Complete Assessment'">Complete Assessment</option>
+                      <option value="Contact" ngSelected="emailEntity.TokenId=='Contact'">Contact Us</option>
+                      <option value="Registration" ngSelected="emailEntity.TokenId=='Registration'">Registration</option>
+                      <option value="Reminder of Assessment" ngSelected="emailEntity.TokenId=='Reminder of Assessment'">Reminder of Assessment</option>
+                      <option value="Reset Password" ngSelected="emailEntity.TokenId=='Reset Password'">Reset Password</option>
+                      <option value="Start Assessment" ngSelected="emailEntity.TokenId=='Start Assessment'">Start Assessment</option> -->
+
+
+                    </select>
+                  <span class="error_span" *ngIf="(TokenId.dirty && TokenId.invalid) || (TokenId.pristine && submitted)"> 
+                      <span *ngIf="TokenId.errors.required || (TokenId.pristine && submitted)">Please Select Email Token</span>
+                  </span>
+                </div>
+                  </div>
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                  <label>
+                    <span>*</span>Subject<small *ngIf="(emailEntity.TokenId=='Registration' || emailEntity.TokenId=='Complete Assessment') && (emailEntity.To==1 || emailEntity.To==2 )"> (Company name is appended dynamically in subject field)</small> </label>
+                    
+                    <input type="text" class="form-control" #Subject="ngModel" [(ngModel)]="emailEntity.Subject" name="Subject" pattern="[a-zA-Z0-9/\-_{}@!#$() ]{1,500}" [ngClass]="{red_border: (Subject.dirty && Subject.invalid) || (Subject.pristine && submitted)}" required/>  
+                    <span class="error_span" *ngIf="(Subject.dirty && Subject.invalid) || (Subject.pristine && submitted)"> 
+                      <span *ngIf="Subject.errors.required || (Subject.pristine && submitted)">Please enter Subject</span>
+                      <span *ngIf="Subject.errors && Subject.errors.pattern">Please enter valid Subject</span>
+                    </span> 
+                 
+                  </div>
+                  </div>
+                <div class="clearfix"></div>
+                <!-- <div *ngIf="emailEntity.TokenId!='Contact'"> -->
+                <div class="col-md-9 col-sm-9 col-xs-12">
+                    <div class="form-group focused ckeditor_block editor">
+                  <label>
+                    <span>*</span>Email Body</label>
+                    <textarea class="form-control" #EmailBody="ngModel" [(ngModel)]="emailEntity.EmailBody" name="EmailBody" id="EmailBody"	rows="10" cols="60" contenteditable="true"></textarea>
+                    <span class="error_span" *ngIf="des_valid">Please enter Email Body</span>                
+                </div>
+                </div>
+				<div class="col-md-3 col-sm-3 col-xs-12">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  Placeholder List
+                </div>
+                <div class="panel-body btn-email">                  
+                  <div class="contacts">
+                    <div id="contactList">
+                      <div *ngFor="let ph of placeholderList" class="contact h-card" data-contact="0" draggable="true" tabindex="0" title="Drag And Drop">
+                          {{ph.PlaceholderName}}
+                      </div> 
+                                   
+                    </div>
+                  </div>
+                </div>
+                <!--</div>-->
+              </div>
+            </div>
+                <div class="clearfix"></div>
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <div class="form-group">
+                  <label>
+                    <span>*</span>To</label>
+                    <select #To="ngModel" [(ngModel)]="emailEntity.To" name="To" [ngClass]="{red_border: (To.dirty && To.invalid) || (To.pristine && submitted)}" required>
+                      <option value="" ngSelected='emailEntity.To==""'></option>
+                      <ng-container *ngFor="let role of roleList">
+                          <option *ngIf="(emailEntity.Cc!=role.RoleId)&&(emailEntity.Bcc!=role.RoleId)" value="{{role.RoleId}}" ngSelected="emailEntity.To==role.RoleId">{{role.RoleName}}</option>
+                      </ng-container>
+                      <!-- <option *ngFor="let role of roleList" value="{{role.RoleId}}" ngSelected="emailEntity.To==role.RoleId">{{role.RoleName}}</option>                                       -->
+                  </select>
+                  <span class="error_span" *ngIf="(To.dirty && To.invalid) || (To.pristine && submitted)"> 
+                      <span *ngIf="To.errors.required || (To.pristine && submitted)">Please Select To</span>
+                    </span>
+                </div>
+                </div>
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <div class="form-group">
+                  <label>CC</label>
+                  <select #Cc="ngModel" [(ngModel)]="emailEntity.Cc" name="Cc">
+                    <option value="" ngSelected='emailEntity.Cc==""'></option>
+                    <ng-container *ngFor="let role of roleList">
+                      <option *ngIf="(emailEntity.To!=role.RoleId)&&(emailEntity.Bcc!=role.RoleId)" value="{{role.RoleId}}" ngSelected="emailEntity.Cc==role.RoleId">{{role.RoleName}}</option>
+                    </ng-container>     
+                    <!-- <option *ngFor="let role of roleList" value="{{role.RoleId}}" ngSelected="emailEntity.Cc==role.RoleId">{{role.RoleName}}</option>                                       -->
+                </select>
+                </div>
+                </div>
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <div class="form-group">
+                  <label>BCC</label>
+                  <select #Bcc="ngModel" [(ngModel)]="emailEntity.Bcc" name="Bcc">
+                    <option value="" ngSelected='emailEntity.Bcc==""'></option>
+                    <ng-container *ngFor="let role of roleList">
+                        <option *ngIf="(emailEntity.To!=role.RoleId)&&(emailEntity.Cc!=role.RoleId)" value="{{role.RoleId}}" ngSelected="emailEntity.Bcc==role.RoleId">{{role.RoleName}}</option>
+                    </ng-container>
+                    <!-- <option *ngFor="let role of roleList" value="{{role.RoleId}}" ngSelected="emailEntity.Bcc==role.RoleId">{{role.RoleName}}</option>                                       -->
+                </select>
+                </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                    <div class="form-group">
+                  <label>Email Address</label>
+                  <input type="text" class="form-control" #BccEmail="ngModel" [(ngModel)]="emailEntity.BccEmail" name="BccEmail" pattern="[a-zA-Z0-9/\-_@!#$(),.]{1,1000}" [ngClass]="{red_border: (BccEmail.dirty && BccEmail.invalid)}"/>    
+                 <span class="error_span" *ngIf="(BccEmail.dirty && BccEmail.invalid)"> 
+                    <span *ngIf="BccEmail.errors && BccEmail.errors.pattern">Please enter valid Email Address</span>
+                  </span> 
+                </div>
+                </div>
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                    <div class="form-group1">
+                  <label>
+                    <span class="required">*</span>Active?</label>
+                    <div class="clearfix"></div>
+                  <div class="radiobtn_box">
+                    <input type="radio" name="IsActive" id="role1" value="1" #IsActive="ngModel" [(ngModel)]="emailEntity.IsActive" required/>
+                    <label for="role1">Yes</label>
+                  </div>
+                  <div class="radiobtn_box">
+                    <input type="radio" name="IsActive" id="role2" value="0" #IsActive="ngModel" [(ngModel)]="emailEntity.IsActive" required/>
+                    <label for="role2">No </label>
+                  </div>
+                  <br>
+                  <span class="error_span" *ngIf="(IsActive.dirty && IsActive.invalid) || (IsActive.pristine && submitted)">
+                    <span *ngIf="IsActive.errors.required || (IsActive.pristine && submitted)">Please select active status</span>
+                  </span>
+
+                </div>
+                </div>
+
+                <div class="clearfix"></div>
+
+                <div class="text-center">
+                  <button type="submit" [disabled]="btn_disable" class="next_btn"><span>Submit</span></button>
+                  <button type="button" *ngIf="emailEntity.EmailId==0" (click)="clearForm(EmailForm)" class="back_btn"><span>Clear</span></button>
+                </div>
+                </div>
+              </form>
+            </div>
+            
+           
+          </div>
+          
+          <!-- End Form Elements -->
+        </div>
+
+      </div>
+      <!-- End Form Elements -->
+    </div>
+  
+<!-- end page-wrapper -->

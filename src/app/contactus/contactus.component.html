@@ -1,0 +1,92 @@
+<!-- Contact us Section -->
+<div class="grey_content contact_content">
+  <div class="container">
+    <div class="row">
+	<div [ngClass]="{'col-md-10 col-sm-12 col-md-offset-2 no_padding':globals.authData.RoleId!=4}">
+      <div class="col-md-12 col-sm-12">
+        <h1>Contact us</h1>
+        <div class="white_box">
+          <div class="row">
+            <div class="col-md-6 col-sm-6">
+              <h3>Corporate Message</h3>
+              <div class="contact_block">
+                <div class="c_address"><i class="fa fa-map-pin"></i><span [innerHTML]="contactDetails.address"></span></div>
+                <div class="c_phone"><i class="fa fa-phone"></i>{{contactDetails.phone}}<br>
+                  <i class="fa fa-envelope"></i><a href="mailto:{{contactDetails.email}}">{{contactDetails.email}}</a></div>
+                <div class="clearfix"></div>
+              </div>
+				<div class="map_block">
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m12!1m8!1m3!1d12374.96138306767!2d-77.219576!3d39.157887!3m2!1i1024!2i768!4f13.1!2m1!1sGaithersburg%2C+MD+20879%2C++Located+only+23+miles+away+from+Washington%2C+DC!5e0!3m2!1sen!2sin!4v1533031816900" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                  <!-- <iframe width="600" height="450" frameborder="0" style="border:0" allowfullscreen 
+                  [src]="contactDetails.iframeURL"></iframe> -->
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+              <div class="inquiry_form">
+                <h3>Get in Touch</h3>
+                <!-- <div class="alert alert-{{globals.type}}" role="alert" *ngIf="globals.msgflag">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"></button>
+                  {{globals.message}}
+                </div> -->
+				<p class="padding_15">If you’re considering us or would like to Get in Touch, please fill the form below, Thank you!</p>
+				  <div class="clearfix"></div>
+          <form class="form-validate"  #InquiryForm="ngForm" (ngSubmit)="addInquiry(InquiryForm)">
+                  <div class="form-group">
+                    <label><span class="required">*</span>Name</label>
+											<input type="text"  #Name="ngModel" [(ngModel)]="InquiryEntity.Name" class="form-control" name="Name" pattern="[a-zA-Z'.$\ ]{2,100}" [ngClass]="{red_border: (Name.dirty && Name.invalid)}" required/>		
+											<span class="error_span" *ngIf="(Name.dirty && Name.invalid)">
+													<span *ngIf="Name.errors.required || (Name.pristine && submitted)">
+														Please enter Name
+													</span>												  
+													<span *ngIf="Name.errors && Name.errors.pattern">
+														Please enter valid Name
+													</span>
+											</span>
+                  </div>
+                  <div class="clearfix"></div>
+                  <div class="form-group">
+                    <label><span>*</span>Email Address </label>
+                    <input type="email" class="form-control" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,200}" #Email="ngModel" [(ngModel)]="InquiryEntity.Email" name="Email" [ngClass]="{red_border: (Email.dirty && Email.invalid)}" required/>  
+                    <span class="error_span" *ngIf="(Email.dirty && Email.invalid)"> 
+                        <span *ngIf="Email.errors.required || (Email.pristine && submitted)">Please enter your Email Address</span>
+                        <span *ngIf="Email.errors && Email.errors.pattern">
+                          Please enter valid Email Address
+                        </span>
+                    </span>
+                  </div>
+                  <div class="clearfix"></div>
+                  <div class="form-group">
+                    <label><span>*</span>Phone Number</label>
+                    <input type="text" class="form-control" #PhoneNumber="ngModel" name="PhoneNumber" pattern="[0-9\-.()+\s]{3,13}" maxlength="13" [(ngModel)]="InquiryEntity.PhoneNumber" [ngClass]="{red_border: (PhoneNumber.dirty && PhoneNumber.invalid)}"  required/>
+                    <span class="error_span" *ngIf="(PhoneNumber.dirty && PhoneNumber.invalid)"> 
+                      <span *ngIf="PhoneNumber.errors.required || (PhoneNumber.pristine && submitted)">Please enter your Phone Number</span>
+                      <span *ngIf="PhoneNumber.errors && PhoneNumber.errors.pattern">Please enter your valid Phone Number</span>
+                    </span>
+                  </div>
+                  <div class="clearfix"></div>
+                  <div class="form-group">
+                      <label><span>*</span>Message</label>
+                      <textarea type="text" class="form-control"  #Message="ngModel" maxlength="250" [(ngModel)]="InquiryEntity.Message" name="Message" [ngClass]="{red_border: (Message.dirty && Message.invalid) || (Message.pristine && submitted)}" required></textarea>
+                        <span class="error_span" *ngIf="(Message.dirty && Message.invalid) || (Message.pristine && submitted)">
+                        <span *ngIf="Message.errors.required || (Message.pristine && submitted)">
+                          Please enter Message
+                            </span>                           
+                      </span>
+                  </div>
+                  <div class="clearfix"></div>
+                  <button type="submit" [disabled]="btn_disable" class="next_btn"><span>Send Message</span></button>
+                  <div class="clearfix"></div>
+                </form>
+              </div>
+            </div>
+			<div class="clearfix"></div>
+          </div>
+        </div>
+      </div>
+	  </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+</div>
+<div class="clearfix"></div>
+<!-- End Contact us Section --> 

@@ -1,0 +1,81 @@
+<div class="grey_content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-sm-12 col-md-offset-2">
+        <h1>Feedback Sub-Category</h1>
+         
+        <div class="white_box">
+      <div class="buttons_block">
+        <a routerLink="/sub-category/add" class="next_btn"><i class="fa fa-plus"></i>Add Feedback Sub-Category</a>
+        <div id="buttons" class="pull-right"></div>
+        <div class="clearfix"></div>
+      </div>
+          <table id="list_tables" class="table table-hover" style="width:100%">
+            <thead>
+                <tr>
+                  <th class="tbl1_width">No.</th>
+                  <th>Sub-Category</th>
+                  <th>Category</th>
+                  <th>Reverse Answer?</th>
+                  <th class="tbl_width text-center">Active?</th>
+                  <th class="print_none tbl_width text-center" *ngIf="permissionEntity.AddEdit==1 || permissionEntity.Delete==1">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let category of subcategoryList; let i = index" >
+                      <td>{{i+1}}</td> 
+                      <td>{{category.Name}}</td>  
+                      <td>{{category.catName}}</td>   
+                      <td *ngIf="category.IsReverseAnswer=='1'">Yes</td>
+                      <td *ngIf="category.IsReverseAnswer=='0'">No</td>                 
+                      <!--<td *ngIf="category.IsActive=='1'">Yes</td>
+                      <td *ngIf="category.IsActive=='0'"  >No</td> -->
+                      <td class="text-center">
+                      <div class="activeyes_box" *ngIf="category.isdisabled==0" data-toggle="tooltip" data-placement="top"  [attr.title]="category.IsActive==1 ? 'Active' : 'Deactive'">
+                          <input type="checkbox" name="active1" id="active{{i}}" (change)="isActiveChange(category,i)" [checked]="category.IsActive==1" value="Yes" >
+                          <label for="active{{i}}"></label>
+                        </div>
+                        <div *ngIf="category.isdisabled>0" class="activeyes_box" data-toggle="tooltip" data-placement="top" title="You can’t deactivate SubCategory as it has been already used in Questions">
+                            <input type="checkbox" name="active1" [disabled]="category.isdisabled>0" id="active{{i}}" (change)="isActiveChange(category,i)" [checked]="category.IsActive==1" value="Yes" >
+                            <label for="active{{i}}"></label>
+                        </div>
+                        </td>
+                      <td class="print_none text-center"  *ngIf="permissionEntity.AddEdit==1 || permissionEntity.Delete==1">
+                       <div class="inline_delbtn tooltip_inline"> 
+                             <button  data-toggle="tooltip" data-placement="top"   title="Edit" *ngIf="permissionEntity.AddEdit==1" class="edit" routerLink="/sub-category/edit/{{category.FeedbackCategoryId}}" > <i class="fa fa-edit"></i> </button>
+                        </div>
+                        <div *ngIf="(permissionEntity.Delete==1) && (category.isdisabled>0)" class="inline_delbtn tooltip_inline" data-toggle="tooltip" data-placement="top"  title="You can’t delete SubCategory as it has been already used in Questions"> 
+                        <button [disabled]="category.isdisabled>0"   (click)="deletesubcategory(category)"  class="delete"> <i class="fa fa-trash"></i> </button>
+                        </div>
+                        <div *ngIf="(permissionEntity.Delete==1) && (category.isdisabled==0)" class="inline_delbtn tooltip_inline"> 
+                        <button    data-toggle="tooltip" data-placement="top"   title="Delete"  (click)="deletesubcategory(category)"  class="delete"> <i class="fa fa-trash"></i> </button>
+                        </div></td>
+                    </tr>
+                    <tr *ngIf="subcategoryList.length<=0">
+                      <td colspan="6" class="text-center">There is no record found</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      <div class="clearfix"></div>
+
+
+<!-- Model -->
+<!-- <div class="modal fade bs-example-modal-sm"  id="Delete_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+          <div class="modal-body">
+              <p>Are you sure you want to remove this Feedback Sub-Category?</p>
+            </div>
+            <div class="modal-footer text-center">
+              <button type="button" class="next_btn" (click)="deleteConfirm(deleteEntity)" id="yes_btn"><span>Yes</span></button>
+              <button type="button" class="back_btn" data-dismiss="modal"><span>No</span></button>
+          </div>
+      </div>
+  </div>
+</div> -->

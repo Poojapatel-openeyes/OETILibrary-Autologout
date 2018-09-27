@@ -1,0 +1,42 @@
+<!-- <p><a *ngIf="globals.authData!=undefined" (click)="logout()">Sign Out</a></p> -->
+
+<!-- Header Section -->
+<header>
+        <div class="container">
+          <div class="row"> 
+            <!-- Logo -->
+            <div class="col-md-2 col-sm-3 col-xs-5">
+              <div class="logo"> <a routerLink="/dashboard">
+                <img *ngIf="company_workspace!='' && Company.CompanyLogo!=null" src="assets/company/{{Company.CompanyLogo}}"  class="img-responsive">
+                <img *ngIf="company_workspace=='' || Company.CompanyLogo==null" src="assets/images/logo.png"  class="img-responsive">
+              </a>
+               </div>
+            </div>
+            <!-- End Logo --> 
+            
+            <!-- Navigation -->
+            <div class="col-md-10 col-sm-9 col-xs-7">
+              <ul class="user_dropdown" *ngIf="globals.authData!=undefined">
+                <li><a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><span class="letters">{{firstNameChar | uppercase}}{{lastNameChar | uppercase}}</span></a>
+                  <ul class="dropdown-menu">
+                    <li class="img_name">
+						<div class="bg_block"></div>
+                      <div class="red_bg"><i class="fa fa-sort-asc"></i><span class="letters pull-left">{{firstNameChar | uppercase}}{{lastNameChar | uppercase}}</span>
+                        <div class="name_email">{{globals.authData.FirstName}} {{globals.authData.LastName}}<br>
+                          <span>{{globals.authData.EmailAddress}}</span></div>
+                        <div class="clearfix"></div>
+                      </div>
+                    </li>
+                    <li><a routerLink="/editprofile"><i class="fa fa-edit"></i>My Profile</a></li>
+                    <li><a routerLink="/contactus"><i class="fa fa-support"></i>Contact Us</a></li>
+                    <li class="sign_btn"><a (click)="logout()" class="next_btn">Sign Out</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+            <!-- End Navigation -->
+            <div class="clearfix"></div>
+          </div>
+        </div>
+      </header>
+      <div class="clearfix"></div>

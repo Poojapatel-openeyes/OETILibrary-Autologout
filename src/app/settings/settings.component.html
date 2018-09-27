@@ -1,0 +1,342 @@
+<div class="grey_content">
+    <div class="container">
+        <div class="row" >
+            <div class="col-md-10 col-sm-12 col-md-offset-2">
+        
+         </div></div>
+      <div class="row" *ngIf="globals.authData.RoleId==5">
+        <div class="col-md-10 col-sm-12 col-md-offset-2">
+          <h1> General Configurations </h1>
+         
+            <!-- <div class="alert alert-{{globals.type}}" role="alert" *ngIf="globals.msgflag">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+            {{globals.message}}
+            </div> -->
+          <div class="white_box">
+			  <div class="row">		
+			<!-- <div class="col-md-6 col-sm-12">			  
+				<form #contForm="ngForm" (ngSubmit)="addcontact(contForm)" *ngIf="globals.authData.RoleId==5">
+				<div class="form-group">
+							<label><span>*</span>Contact Us Email</label>
+							<input type="text" class="form-control" #ContactFrom="ngModel" [(ngModel)]="ContactEntity.ContactFrom" name="ContactFrom" pattern="[a-zA-Z0-9.,-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}(,|$)" [ngClass]="{red_border: (ContactFrom.dirty && ContactFrom.invalid) || (ContactFrom.pristine && submitted5)}"  required/>    
+							<span class="error_span" *ngIf="(ContactFrom.dirty && ContactFrom.invalid) || (ContactFrom.pristine && submitted5)"> 
+							<span *ngIf="ContactFrom.errors.required || (ContactFrom.pristine && submitted5)">Please enter email from</span>
+							<span *ngIf="!(ContactFrom.errors.required || (ContactFrom.pristine && submitted5)) && ContactFrom.errors.pattern">
+							Please enter a valid email from 
+							</span>
+							</span>
+				</div>
+				<button type="submit" *ngIf="permissionEntity.AddEdit==1" [disabled]="btn_disable5" class="next_btn"><span>Submit</span></button>
+				</form>
+			</div>   -->
+			<div class="col-md-6 col-sm-12 col-xs-12">						
+				<form #registerForm="ngForm" (ngSubmit)="addOpenRegister(registerForm)" *ngIf="globals.authData.RoleId==5">
+					<!-- No of ksa code start -->
+							<div class="form-group1">
+								<label><span>*</span>Open Registration for Client</label>
+								<div class="clearfix"></div>
+								<div class="radiobtn_box">
+								<input type="radio"  name="IsOpenRegister" id="role1" value="1" #IsOpenRegister="ngModel" [(ngModel)]="configEntity.IsOpenRegister" required/>
+								<label for="role1">Yes</label>
+								</div>                    
+								<div class="radiobtn_box" >
+								<input type="radio" name="IsOpenRegister" id="role2" value="0" #IsOpenRegister="ngModel" [(ngModel)]="configEntity.IsOpenRegister" required/>
+								<label for="role2">No </label>
+								</div>                     
+								<span class="error_span" *ngIf="(IsOpenRegister.dirty && IsOpenRegister.invalid) || (IsOpenRegister.pristine && submitted1)"> 
+								<span *ngIf="IsOpenRegister.errors.required || (IsOpenRegister.pristine && submitted1)">Please select Active Status</span>
+								</span>                        
+							</div>
+						<button type="submit" *ngIf="permissionEntity.AddEdit==1" [disabled]="btn_disable1" class="next_btn"><span>Submit</span></button>
+				</form> 
+			</div>			  
+				<div class="clearfix"></div> 
+			  </div>
+              </div>
+              </div>
+              </div>
+              <div class="row">
+                  <div class="col-md-10 col-sm-10 col-md-offset-2 col-sm-offset-2">
+                    <!-- <h1>{{header}} Feedback Answer</h1> -->
+                      <!-- <div class="alert alert-{{globals.type}}" role="alert" *ngIf="globals.msgflag">
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+                      {{globals.message}}
+                      </div> -->
+                    
+              </div>
+              </div>
+              
+              <div class="row">
+                  <div class="col-md-10 col-sm-10 col-md-offset-2 col-sm-offset-2">
+                    <h1>Invitation Message</h1>
+                      <!-- <div class="alert alert-{{globals.type}}" role="alert" *ngIf="globals.msgflag">
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+                      {{globals.message}}
+                      </div> -->
+                    <div class="white_box">
+              <form #InvitationForm="ngForm" (ngSubmit)="addInvitationm(InvitationForm)">
+                
+                <!-- No of ksa code start -->
+                <div class="row">
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                        <div class="form-group">
+                  <label><span>*</span>Success</label>
+                  
+                    <input type="text" class="form-control" pattern="[a-zA-Z]{2,}" #Success="ngModel" [(ngModel)]="InviEntity.Success" name="Success"  [ngClass]="{red_border: ((Success.dirty && Success.invalid) || (Success.pristine && submitted6))}" required/>  
+                    <span class="error_span" *ngIf="(Success.dirty && Success.invalid) || (Success.pristine && submitted6)"> 
+                        <span *ngIf="Success.errors.required || (Success.pristine && submitted6)">Please enter Success</span>                      
+                        <span *ngIf="!(Success.errors.required || (Success.pristine && submitted6)) && Success.errors.pattern">Please enter valid Success</span>
+                      </span>
+                  </div>
+                </div>
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                    <div class="form-group">
+                  <label><span>*</span>Revoke</label>
+                  
+                    <input type="text" class="form-control" pattern="[a-zA-Z]{2,}" #Revoke="ngModel" [(ngModel)]="InviEntity.Revoke" name="Revoke" [ngClass]="{red_border: (Revoke.dirty && Revoke.invalid) || (Revoke.pristine && submitted6)}" required/>  
+                    <span class="error_span" *ngIf="(Revoke.dirty && Revoke.invalid) || (Revoke.pristine && submitted6)"> 
+                      <span *ngIf="Revoke.errors.required || (Revoke.pristine && submitted6)">Please enter Revoke Message</span>
+                      <span  *ngIf="!(Revoke.errors.required || (Revoke.pristine && submitted6)) && Revoke.errors.pattern">
+                        Please enter a valid Revoke Message
+                    </span>
+                    </span>
+                  </div>
+                </div>
+				<div class="clearfix"></div>
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                    <div class="form-group">
+                  <label><span>*</span>Pending</label>
+                    <input type="text" class="form-control" pattern="[a-zA-Z]{2,}" #Pending="ngModel" [(ngModel)]="InviEntity.Pending" name="Pending" [ngClass]="{red_border: (Pending.dirty && Pending.invalid) || (Pending.pristine && submitted6)}" required/>  
+                    <span class="error_span" *ngIf="(Pending.dirty && Pending.invalid) || (Pending.pristine && submitted6)"> 
+                      <span *ngIf="Pending.errors.required || (Pending.pristine && submitted6)">Please enter Pending Message</span>
+                      <span *ngIf="!(Pending.errors.required || (Pending.pristine && submitted6)) && Pending.errors.pattern">
+                        Please enter a valid Pending Message
+                    </span>
+                    </span>
+                  </div>
+                  </div>
+                  <div class="clearfix"></div>
+                  <div class="col-md-6 col-sm-12 col-xs-12">
+                    <button type="submit" *ngIf="permissionEntity.AddEdit==1" [disabled]="btn_disable6" class="next_btn"><span>Submit</span></button>
+                    <!--<button class="btn res-btn">Edit</button>--> 
+                  </div>
+                </div>
+                
+              </form>
+              <!-- remaining day code start --> 
+              </div>
+              
+              
+            </div>
+          </div>
+        
+        <div class="alert alert-success" role="alert" *ngIf="cmsgflag1">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"> </button>
+          {{cmessage1}}
+       </div>
+       <div class="row">
+          <div class="col-md-10 col-sm-10 col-md-offset-2 col-sm-offset-2">
+            <h1>SMTP Details</h1>
+              <!-- <div class="alert alert-{{globals.type}}" role="alert" *ngIf="globals.msgflag">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+              {{globals.message}}
+              </div> -->
+            <div class="white_box">
+              <!-- email from start -->
+              <form #fromForm="ngForm" (ngSubmit)="addEmailFrom(fromForm)">
+                
+                <!-- No of ksa code start -->
+                <div class="row">
+                    <div class="col-md-6 col-sm-12 col-xs-12">
+                        <div class="form-group">
+                  <label><span>*</span>Email Address</label>
+                 
+                    <input type="text" class="form-control" pattern="[a-zA-Z0-9.-/-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" #emailfrom="ngModel" [(ngModel)]="configEntity.emailfrom" name="emailfrom" [ngClass]="{red_border: (emailfrom.dirty && emailfrom.invalid) || (emailfrom.pristine && submitted4)}" required/>  
+                    <span class="error_span" *ngIf="(emailfrom.dirty && emailfrom.invalid) || (emailfrom.pristine && submitted4)"> 
+                      <span *ngIf="emailfrom.errors.required || (emailfrom.pristine && submitted4)">Please enter Email from</span>
+                      <span *ngIf="emailfrom.errors && emailfrom.errors.pattern">
+                        Please enter a valid Email Address
+                    </span>
+                    </span>
+                  </div>
+                </div>
+                <div class="col-md-6 col-sm-12 col-xs-12">
+                    <div class="form-group">
+                  <label><span>*</span>Password</label>
+
+                    <input type="password" class="form-control" #emailpassword="ngModel" [(ngModel)]="configEntity.emailpassword" name="emailpassword" [ngClass]="{red_border: (emailpassword.dirty && emailpassword.invalid) || (emailpassword.pristine && submitted4)}" required/>  
+                    <span class="error_span" *ngIf="(emailpassword.dirty && emailpassword.invalid) || (emailpassword.pristine && submitted4)"> 
+                      <span *ngIf="emailpassword.errors.required || (emailpassword.pristine && submitted4)">Please enter Password</span>
+                    </span>
+                  </div>
+                </div>
+                
+                <div class="clearfix"></div>
+                  <div class="col-md-6 col-sm-12 col-xs-12">
+                    <button type="submit" *ngIf="permissionEntity.AddEdit==1" [disabled]="btn_disable4" class="next_btn"><span>Submit</span></button>
+                    <!--<button class="btn res-btn">Edit</button>--> 
+                  </div>
+                </div>
+              </form>
+              <!-- email from end --> 
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-10 col-sm-10 col-md-offset-2 col-sm-offset-2">
+              <h1>Contact Us</h1>
+                <!-- <div class="alert alert-{{globals.type}}" role="alert" *ngIf="globals.msgflag">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+                {{globals.message}}
+                </div> -->
+              <div class="white_box">
+        <form #ContactusForm="ngForm" (ngSubmit)="addContactus(ContactusForm)">
+          
+          <!-- No of ksa code start -->
+          <div class="row">
+              <div class="col-md-6 col-sm-12 col-xs-12">
+                  <div class="form-group">
+            <label><span>*</span>Phone Number</label>
+            <input type="text" class="form-control" #phoneno="ngModel" name="phoneno" pattern="[0-9\-.()+\s]{3,13}" maxlength="13"
+                  [(ngModel)]="contactUsEntity.phoneno" [ngClass]="{red_border: (phoneno.dirty && phoneno.invalid) || (phoneno.pristine && submitted7)}"  required/>
+                  <span class="error_span" *ngIf="(phoneno.dirty && phoneno.invalid) || (phoneno.pristine && submitted7)"> 
+                    <span *ngIf="phoneno.errors.required || (phoneno.pristine && submitted7)">Please enter your Phone Number</span>
+                    <span *ngIf="phoneno.errors && phoneno.errors.pattern">Please enter your valid Phone Number</span>
+                  </span>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group">
+            <label><span>*</span>Email</label>
+              <input type="email" class="form-control" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" #email="ngModel" [(ngModel)]="contactUsEntity.email" name="email" [ngClass]="{red_border: (email.dirty && email.invalid) || (email.pristine && submitted7)}" required/>  
+                  <span class="error_span" *ngIf="(email.dirty && email.invalid) || (email.pristine && submitted7)"> 
+                      <span *ngIf="email.errors.required || (email.pristine && submitted7)">Please enter your Email</span>
+                      <span *ngIf="email.errors && email.errors.pattern">
+                        Please enter valid Email
+                      </span>
+                  </span>
+            </div>
+          </div>
+		  <div class="clearfix"></div>
+          <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group">
+            <label><span>*</span>Address</label>
+            <textarea type="text" class="form-control"  #address="ngModel" [(ngModel)]="contactUsEntity.address" name="address" 
+            [ngClass]="{red_border: (address.dirty && address.invalid) || (address.pristine && submitted7)}" required></textarea>
+              <span class="error_span" *ngIf="(address.dirty && address.invalid) || (address.pristine && submitted7)">
+              <span *ngIf="address.errors.required || (address.pristine && submitted7)">
+                Please enter your Address
+                  </span>                           
+            </span>
+            </div>
+            </div>
+            <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group">
+              <label><span>*</span>Latitude</label>
+            <input type="text" class="form-control" #Latitude ="ngModel" [(ngModel)]="contactUsEntity.Latitude" class="form-control" name="Latitude" pattern="[0-9\-]+(\.\d{1,8})?$" maxlength="15" 
+            [ngClass]="{red_border: (Latitude.dirty && Latitude.invalid) || (Latitude.pristine && submitted7)}" required>
+            <span class="error_span" *ngIf="(Latitude.dirty && Latitude.invalid) || (Latitude.pristine && submitted7)"> 
+            <span *ngIf="Latitude.errors.required || (Latitude.pristine && submitted7)">Please enter Latitude</span>
+            </span>
+            <span class="error_span" *ngIf="Latitude.errors && Latitude.errors.pattern">
+            Please enter valid Latitude
+            </span>
+            </div>
+            </div>
+            <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group">
+              <label><span>*</span>Longitude</label>
+            <input type="text" class="form-control" #Longitude ="ngModel" [(ngModel)]="contactUsEntity.Longitude" class="form-control" name="Longitude" pattern="[0-9\-]+(\.\d{1,8})?$" maxlength="15" 
+            [ngClass]="{red_border: (Longitude.dirty && Longitude.invalid) || (Longitude.pristine && submitted7)}" required>
+            <span class="error_span" *ngIf="(Longitude.dirty && Longitude.invalid) || (Longitude.pristine && submitted7)"> 
+            <span *ngIf="Longitude.errors.required || (Longitude.pristine && submitted7)">Please enter Longitude</span>
+            </span>
+            <span class="error_span" *ngIf="Longitude.errors && Longitude.errors.pattern">
+            Please enter valid Longitude
+            </span>
+            </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="col-md-6 col-sm-12 col-xs-12">
+              <button type="submit" *ngIf="permissionEntity.AddEdit==1" [disabled]="btn_disable7" class="next_btn"><span>Submit</span></button>
+              <!--<button class="btn res-btn">Edit</button>--> 
+            </div>
+          </div>
+          
+        </form>
+        <!-- remaining day code start --> 
+        </div>
+        
+        
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-10 col-sm-10 col-md-offset-2 col-sm-offset-2">
+        <h1>Reminder</h1>
+          <!-- <div class="alert alert-{{globals.type}}" role="alert" *ngIf="globals.msgflag">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+          {{globals.message}}
+          </div> -->
+        <div class="white_box">
+  <form #ReminderForm="ngForm" (ngSubmit)="addReminder(ReminderForm)">
+    
+    <!-- No of ksa code start -->
+    <div class="row">
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group">
+      <label><span>*</span>Low no. of License Remaining – Reminder</label>
+      
+        <input type="text" class="form-control" pattern="[0-9]{1,}" #noofLicense="ngModel" [(ngModel)]="ReminderEntity.noofLicense" name="noofLicense"  [ngClass]="{red_border: ((noofLicense.dirty && noofLicense.invalid) || (noofLicense.pristine && submitted8))}" required/>  
+        <span class="error_span" *ngIf="(noofLicense.dirty && noofLicense.invalid) || (noofLicense.pristine && submitted8)"> 
+            <span *ngIf="noofLicense.errors.required || (noofLicense.pristine && submitted8)">Please enter noofLicense</span>                      
+            <span *ngIf="!(noofLicense.errors.required || (noofLicense.pristine && submitted8)) && noofLicense.errors.pattern">Please enter valid noofLicense</span>
+          </span>
+      </div>
+    </div>
+    <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group">
+      <label><span>*</span>License Pack Validity Expiry – Reminder</label>
+      
+        <input type="text" class="form-control" pattern="[0-9]{1,}" #LicenseExpiry="ngModel" [(ngModel)]="ReminderEntity.LicenseExpiry" name="LicenseExpiry" [ngClass]="{red_border: (LicenseExpiry.dirty && LicenseExpiry.invalid) || (LicenseExpiry.pristine && submitted8)}" required/>  
+        <span class="error_span" *ngIf="(LicenseExpiry.dirty && LicenseExpiry.invalid) || (LicenseExpiry.pristine && submitted8)"> 
+          <span *ngIf="LicenseExpiry.errors.required || (LicenseExpiry.pristine && submitted8)">Please enter License Expiry</span>
+          <span  *ngIf="!(LicenseExpiry.errors.required || (Revoke.pristine && submitted8)) && LicenseExpiry.errors.pattern">
+            Please enter a valid License Expiry
+        </span>
+        </span>
+      </div>
+    </div>
+<div class="clearfix"></div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <div class="form-group">
+      <label><span>*</span>Incomplete Feedback – Reminder</label>
+        <input type="text" class="form-control" pattern="[0-9]{1,}" #IncompleteFeedback="ngModel" [(ngModel)]="ReminderEntity.IncompleteFeedback" name="IncompleteFeedback" [ngClass]="{red_border: (IncompleteFeedback.dirty && IncompleteFeedback.invalid) || (IncompleteFeedback.pristine && submitted8)}" required/>  
+        <span class="error_span" *ngIf="(IncompleteFeedback.dirty && IncompleteFeedback.invalid) || (IncompleteFeedback.pristine && submitted8)"> 
+          <span *ngIf="IncompleteFeedback.errors.required || (IncompleteFeedback.pristine && submitted8)">Please enter Incomplete Feedback</span>
+          <span *ngIf="!(IncompleteFeedback.errors.required || (IncompleteFeedback.pristine && submitted8)) && IncompleteFeedback.errors.pattern">
+            Please enter a valid Incomplete Feedback 
+        </span>
+        </span>
+      </div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="col-md-6 col-sm-12 col-xs-12">
+        <button type="submit" *ngIf="permissionEntity.AddEdit==1" [disabled]="btn_disable8" class="next_btn"><span>Submit</span></button>
+        <!--<button class="btn res-btn">Edit</button>--> 
+      </div>
+    </div>
+    
+  </form>
+  <!-- remaining day code start --> 
+  </div>
+  
+  
+</div>
+</div>
+      </div>
+    </div>
+
+  <!-- end page-wrapper --> 
+
+  

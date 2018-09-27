@@ -1,0 +1,19 @@
+<title>Learn Feedback {{globals.pageTitle}}</title>
+
+<div class="loader_new" *ngIf="globals.isLoading">
+  <div style="position: fixed; z-index: 9999999; top: 40%; left: 48%;">
+      <div class="lds-css ng-scope"><div style="width:100%;height:100%" class="lds-double-ring"><div></div><div></div></div></div>
+      <div style="color: #fff; margin-top: 10px; text-align: center; z-index:9999999; position:relative;"><strong>Processing...</strong></div>
+  </div>
+</div>
+
+<app-header *ngIf="globals.authData!=undefined"></app-header>
+<app-left-menu *ngIf="globals.authData!=undefined && globals.authData.RoleId!=4 && globals.currentLink!='/pagenotfound'"></app-left-menu>
+  
+<router-outlet></router-outlet>
+
+<app-footer *ngIf="globals.authData!=undefined"></app-footer>
+
+
+
+

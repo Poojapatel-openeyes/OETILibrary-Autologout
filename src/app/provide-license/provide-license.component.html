@@ -1,0 +1,67 @@
+<div class="grey_content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-sm-12 col-md-offset-2">
+	  <div class="row">
+		<div class="col-md-12 col-sm-12">
+		 <h1 class="pull-left">Provide License Pack</h1>
+            
+			<!-- <div class="btn-group pull-right add-right">
+                      <a routerLink="/discount/list" class="btn btn-danger btn-add">
+                      <i class="fa fa-reply fa-fw"></i> Back
+                      </a>
+                </div> -->
+		</div>
+         </div>
+        <div class="white_box">
+              
+                <div class="clearfix"></div>
+                          <form role="form" #ProvideLicenseForm="ngForm" (ngSubmit)="provideLicense(ProvideLicenseForm)">
+          
+                            <div class="row">
+                              <div class="col-md-6 col-sm-12 col-xs-12">
+                                  <div class="form-group">
+                                  <label><span>*</span>Client Name</label>
+                                 <select class='select-option' required #UserId="ngModel" [(ngModel)]="provideLicenseEntity.UserId" name="UserId" [ngClass]="{red_border: (UserId.dirty && UserId.invalid) || (UserId.pristine && submitted)}">
+              <option value="" ngSelected='provideLicenseEntity.UserId==""'></option>
+              <ng-container *ngFor="let client of ClientList">
+                <option value="{{client.UserId}}">{{client.FirstName}} {{client.LastName}}</option>
+              </ng-container> 
+            </select>
+          <span class="error_span"  *ngIf="(UserId.dirty && UserId.invalid) || (UserId.pristine && submitted)"> 
+              <span *ngIf="UserId.errors.required || (UserId.pristine && submitted)">Please select Client </span>
+            </span>
+                              </div>
+                              </div>
+                             
+                              <div class="col-md-6 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                <label><span>*</span>License Pack</label>
+                               <select class='select-option' required #LicensePackId="ngModel" [(ngModel)]="provideLicenseEntity.LicensePackId" name="LicensePackId" [ngClass]="{red_border: (LicensePackId.dirty && LicensePackId.invalid) || (LicensePackId.pristine && submitted)}">
+            <option value="" ngSelected='provideLicenseEntity.LicensePackId==""'></option>
+            <ng-container *ngFor="let license of LicenseList">
+              <option value="{{license.LicensePackId}}">{{license.Name}}</option>
+            </ng-container> 
+          </select>
+        <span class="error_span"  *ngIf="(LicensePackId.dirty && LicensePackId.invalid) || (LicensePackId.pristine && submitted)"> 
+            <span *ngIf="LicensePackId.errors.required || (LicensePackId.pristine && submitted)">Please select License Pack </span>
+          </span>
+                            </div>
+                            </div>
+
+          <div class="clearfix"></div>
+          <div class="text-center">
+            <button type="submit" [disabled]="btn_disable" class="next_btn"><span>Provide</span></button>
+            <!-- <button type="button" *ngIf="DiscountEntity.DiscountId==0" (click)="clearForm(DiscountForm)" class="back_btn"><span>Clear</span></button> -->
+          </div>
+          </div>
+        </form>
+      </div>
+      </div>
+      <!--</div>-->
+      </div>
+      <!-- End Form Elements -->
+      </div>
+      </div>
+      <div class="clearfix"></div>
+

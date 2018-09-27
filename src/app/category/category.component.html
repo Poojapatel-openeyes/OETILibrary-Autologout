@@ -1,0 +1,74 @@
+<div class="grey_content">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 col-sm-12 col-md-offset-2">
+		<div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+		 <h1 class="pull-left">{{header}} Feedback Category</h1>
+            <!-- <div class="alert alert-{{globals.type}}" role="alert" *ngIf="globals.msgflag">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+            {{globals.message}}
+            </div> -->
+			  <div class="btn-group pull-right add-right">
+                        <a routerLink="/category/list" class="btn btn-danger btn-add">
+                        <i class="fa fa-reply fa-fw"></i> Back
+                        </a>
+                  </div>
+		</div>
+         </div>
+		
+          <div class="white_box">
+              
+                          <form #categoryForm="ngForm" (ngSubmit)="addCategory(categoryForm)">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12 col-xs-12">
+                                    <div class="form-group">
+                                  <label><span>*</span>Feedback Category</label>
+                                  <input type="text" class="form-control" #Name="ngModel" [(ngModel)]="categoryEntity.Name" name="Name" pattern="[a-zA-Z-'&\s]{2,}" maxlength="50" [ngClass]="{red_border: (Name.dirty && Name.invalid) || (Name.pristine && submitted)}" required/>  
+                                  <span class="error_span" *ngIf="(Name.dirty && Name.invalid) || (Name.pristine && submitted)"> 
+                                    <span *ngIf="Name.errors.required || (Name.pristine && submitted)">Please enter Feedback Category</span>
+                                    <span *ngIf="Name.errors && Name.errors.pattern">Please enter valid Feedback Category</span>
+                                </span>
+                                </div>
+                                </div>
+                                <div class="clearfix"></div>  
+                                <div class="col-md-6 col-sm-12 col-xs-12">
+                                <div class="form-group1">
+                                  <label><span>*</span>Active?</label>
+                                  
+                                    <div class="radiobtn_box">
+                                    <input type="radio"  name="IsActive" id="role1" value="1" #IsActive="ngModel" [(ngModel)]="categoryEntity.IsActive" required/>
+                                    <label for="role1">Yes</label>
+                                    </div>
+                                    <div class="radiobtn_box" *ngIf="categoryEntity.FeedbackCategoryId==0 || categoryEntity.isdisabled==0"  >
+                                    <input type="radio"   [disabled]="categoryEntity.isdisabled>0" name="IsActive" id="role2" value="0" #IsActive="ngModel" [(ngModel)]="categoryEntity.IsActive" required/>
+                                    <label for="role2">No </label>
+                                    </div>
+                                    <div class="inline_btn tooltip_inline"  data-toggle="tooltip" data-placement="bottom" title="You can’t deactivate Feedback Category as it has been already used in sub-category" > 
+                                    <div class="radiobtn_box" *ngIf="categoryEntity.FeedbackCategoryId>0 && categoryEntity.isdisabled>0"    >
+                                        <input type="radio"    [disabled]="categoryEntity.isdisabled>0" name="IsActive" id="role2" value="0" #IsActive="ngModel" [(ngModel)]="categoryEntity.IsActive" required/>
+                                    <label for="role2">No </label>
+                                    </div>
+                                    </div>
+                                    <span class="error_span" *ngIf="(IsActive.dirty && IsActive.invalid) || (IsActive.pristine && submitted)"> 
+                                    <span *ngIf="IsActive.errors.required || (IsActive.pristine && submitted)">Please select Active Status</span>
+                                    </span>
+
+                              </div>
+                              </div>
+                            <div class="clearfix"></div>
+                                <div class="text-center">
+                                <button type="submit" [disabled]="btn_disable" class="next_btn"><span>Submit</span></button>
+                                <button type="button" *ngIf="categoryEntity.FeedbackCategoryId==0" (click)="clearForm(categoryForm)" class="back_btn"><span>Clear</span></button>
+                                
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            <!--</div>-->
+        </div>
+         <!-- End Form Elements -->
+    </div>
+</div>
+<div class="clearfix"></div>

@@ -1,0 +1,136 @@
+<!-- Register Section -->
+<div class="register_content">
+  <div class="register_bg">
+    <div class="black_bg">
+      <div class="logo">
+         <!-- <a routerLink="/login"><img src="assets/images/logo.png" alt="Learn Feedback" title="Learn Feedback" class="img-responsive">
+        </a>  -->
+        <a *ngIf="company_workspace==''" routerLink="/login">
+          <img *ngIf="company_workspace!='' && Company.CompanyLogo!=null" src="assets/company/{{Company.CompanyLogo}}"  class="img-responsive">
+          <img *ngIf="company_workspace=='' || Company.CompanyLogo==null" src="assets/images/logo.png"  class="img-responsive">
+        </a>
+        <a *ngIf="company_workspace!=''" routerLink="/{{company_workspace}}/login">
+        <img *ngIf="company_workspace!='' && Company.CompanyLogo!=null" src="assets/company/{{Company.CompanyLogo}}" class="img-responsive">
+        <img *ngIf="company_workspace=='' || Company.CompanyLogo==null" src="assets/images/logo.png"  class="img-responsive">
+      </a>
+      </div>
+      <div class="banner_text">A Little More About Feedback
+        <p>Above all, this program guarantees a learning environment that is specially designed to support the individual in your organization.</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-8 col-sm-8 col-xs-12 pull-right no_padding">
+    <div class="right_register">
+      <div class="header_block">
+        <h1 class="pull-left">Create an Account</h1>
+        <div class="login_text pull-right">Already have an Account? 
+          <!-- <a routerLink="/login">Sign In</a> -->
+          <a *ngIf="company_workspace==''" routerLink="/login">Sign In</a>
+          <a *ngIf="company_workspace!=''" routerLink="/{{company_workspace}}/login">Sign In</a>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      <div class="clearfix"></div>
+      <div class="form_block">
+        <p class="padding_15">Enter your details to create your Account</p>
+        <form  #UserRegisterForm="ngForm" (ngSubmit)="updateUser(UserRegisterForm)">
+          <div class="row">
+            <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group">
+                <label><span>*</span>First Name </label>
+                <input type="text" class="form-control" #FirstName="ngModel" [(ngModel)]="UserRegisterEntity.FirstName" name="FirstName" pattern="[a-zA-Z'.$\ ]{2,100}" [ngClass]="{red_border: (FirstName.dirty && FirstName.invalid) || (FirstName.pristine && submitted)}" required/>  
+            <span class="error_span" *ngIf="(FirstName.dirty && FirstName.invalid) || (FirstName.pristine && submitted)"> 
+            <span *ngIf="FirstName.errors.required || (FirstName.pristine && submitted)">Please enter your First Name</span>
+            <span *ngIf="FirstName.errors && FirstName.errors.pattern">Please enter your valid First Name</span>
+          </span>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group">
+                <label><span>*</span>Last Name </label>
+                <input type="text" class="form-control" #LastName="ngModel" [(ngModel)]="UserRegisterEntity.LastName" name="LastName" pattern="[a-zA-Z'.$\ ]{2,100}"
+                [ngClass]="{red_border: (LastName.dirty && LastName.invalid) || (LastName.pristine && submitted)}" required/>  
+                      <span class="error_span" *ngIf="(LastName.dirty && LastName.invalid) || (LastName.pristine && submitted)"> 
+                      <span *ngIf="LastName.errors.required || (LastName.pristine && submitted)">Please enter your Last Name</span>
+                      <span *ngIf="LastName.errors && LastName.errors.pattern">Please enter your valid Last Name</span>
+                    </span>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+           
+            <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group">
+                <label><span>*</span>Email Address </label>
+                <input type="email" class="form-control" disabled="true" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" #EmailAddress="ngModel" [(ngModel)]="UserRegisterEntity.EmailAddress" name="EmailAddress"> 
+                  <!-- <span class="error_span" *ngIf="(EmailAddress.dirty && EmailAddress.invalid) || (EmailAddress.pristine && submitted)"> 
+                    <span *ngIf="EmailAddress.errors.required || (EmailAddress.pristine && submitted)">Please enter your Email address</span>
+                    <span *ngIf="EmailAddress.errors && EmailAddress.errors.pattern">Please enter your valid Email address</span>
+                  </span> -->
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="form-group">
+                  <label><span>*</span>Phone Number </label>
+                  <input type="text" class="form-control" #PhoneNumber="ngModel" name="PhoneNumber" pattern="[0-9\-.()+\s]{3,13}" maxlength="13"
+                  [(ngModel)]="UserRegisterEntity.PhoneNumber" [ngClass]="{red_border: (PhoneNumber.dirty && PhoneNumber.invalid) || (PhoneNumber.pristine && submitted)}"  required/>
+                  <span class="error_span" *ngIf="(PhoneNumber.dirty && PhoneNumber.invalid) || (PhoneNumber.pristine && submitted)"> 
+                    <span *ngIf="PhoneNumber.errors.required || (PhoneNumber.pristine && submitted)">Please enter your Phone Number</span>
+                    <span *ngIf="PhoneNumber.errors && PhoneNumber.errors.pattern">Please enter your valid Phone Number</span>
+                  </span>
+                </div>
+              </div>
+          
+            <div class="clearfix"></div>
+            <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group">
+                <label><span>*</span>Password </label>
+                <input type="password" class="form-control" (keyup)="checkpassword()" data-toggle="tooltip" data-placement="top" title="Use 8 or more characters with a mix of letters, numbers & symbols(! @ # $ & * _ - )" pattern="^([a-zA-Z0-9.-_-@*&$#!]{8,15})$" #Password="ngModel" 
+       [(ngModel)]="UserRegisterEntity.Password" name="Password" [ngClass]="{red_border: (Password.dirty && Password.invalid) || (Password.pristine && submitted)}" required/>
+                 <span class="error_span" *ngIf="(Password.dirty && Password.invalid) || (Password.pristine && submitted)">
+                <span *ngIf="Password.errors && Password.errors.required">
+                  Please enter Password
+                    </span>
+                    
+                    <span *ngIf="Password.errors && Password.errors.pattern">
+                      Please enter valid Password 
+                    </span>
+              </span>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12 col-xs-12">
+              <div class="form-group">
+                <label><span>*</span>Confirm Password</label>
+                <input type="password" class="form-control" (keyup)="checkpassword()" pattern="[a-zA-Z0-9.-_-@$*&!#]{8,15}"#cPassword="ngModel"
+        [(ngModel)]="UserRegisterEntity.cPassword" name="cPassword" [ngClass]="{red_border: ((cPassword.dirty && cPassword.invalid) || (cPassword.pristine && submitted)) || (same && !(cPassword.errors && cPassword.errors.pattern && cPassword.errors.required))}" required/>
+                 <span class="error_span" *ngIf="(cPassword.dirty && cPassword.invalid) || (cPassword.pristine && submitted) || same">
+          <span *ngIf="cPassword.errors && cPassword.errors.required && !same">
+            Please enter Confirm Password
+              </span>
+              
+              <span *ngIf="cPassword.errors && cPassword.errors.pattern && !same">
+                Password must be 8 to 15 characters
+              </span>
+              <span *ngIf="same && !(cPassword.errors && cPassword.errors.pattern && cPassword.errors.required)">
+                Those passwords didn't match
+              </span>
+        </span>
+              </div>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+          <div class="text-center">
+              <button class="next_btn" [disabled]="btn_disable" type="submit"><span>Register</span></button>
+            </div>
+        </form>
+       
+        <div class="clearfix"></div>
+      </div>
+      <div class="clearfix"></div>
+     <app-footer-login></app-footer-login>
+    </div>
+  </div>
+</div>
+<div class="clearfix"></div>
+<!-- End Register Section --> 
+
+

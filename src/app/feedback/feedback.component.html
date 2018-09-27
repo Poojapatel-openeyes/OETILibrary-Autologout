@@ -1,0 +1,130 @@
+<div class="assessment_content grey_content">
+  <div class="container">
+  <div class="row">
+    <div class="col-md-12 col-sm-12">
+      <h1 class="pull-left">Feedback</h1>
+		<button class="next_btn pull-right" (click)="startTour()">Tour Guide</button>
+		<div class="clearfix"></div>
+		<!--<div class="alert alert-info">Feedback info</div>-->
+		<div class="clearfix"></div>
+      <div class="progress">
+        <div class="progress-bar progress-bar-success active progress-bar-striped" role="progressbar"
+    aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:90%"> {{percent}}% Completed </div>
+      </div>
+      </div>
+      <form class="form-validate" #feedbackForm="ngForm" (ngSubmit)="finalSubmit()">
+        <div class="col-md-9 col-sm-8">
+        <div id="slider" class="flexslider">
+          <ul class="slides">       
+              <li *ngFor="let question of QuestionList; let k=index; let f1=first;">
+                <div class="question_box" [ngClass]="{'first_question':(f1 && f2)}" *ngFor="let que of question.row; let i=index; let f2=first;">
+                <div class="category_box">{{que.mcat_name}} <i class="fa fa-angle-double-right"></i> {{que.cat_name}}</div>
+                <div class="content">{{que.Name}}</div>
+                <div class="rating">
+                  <div class="radio_box" *ngFor="let ans of que.answer; let j=index;">
+                    <input type="radio" (change)="selectRadio(que)" [value]="ans.FeedbackAnswerId" #rate{{k}}{{i}}="ngModel" [(ngModel)]="QuestionList[k].row[i].FeedbackAnswerId" name="rate{{k}}{{i}}" id="rate{{k}}{{i}}_radio{{j}}" required/>
+                  <label for="rate{{k}}{{i}}_radio{{j}}">{{ans.Name}}</label>
+                  </div>
+                  <div class="clearfix"></div>
+                </div>
+                </div>
+              </li>
+          </ul>
+        </div> 
+        <div class="clearfix"></div>
+        <div class="text-center">
+          <!-- <button class="next_btn" type="submit" data-toggle="tooltip" data-placement="bottom">Submit</button> -->
+          <div class="tooltip_inline" id="submit_btn" title="To submit feedback you need to attend all Questions" data-toggle="tooltip" data-placement="bottom"><div *ngIf="submit_true"><button type="submit" [disabled]="submit_true" class="next_btn assessment_top"><span >Submit</span></button></div></div>
+          <div class="tooltip_inline" id="submit_btn" title="Submit" data-toggle="tooltip" data-placement="bottom"><button *ngIf="!submit_true" type="submit" [disabled]="submit_true" class="next_btn assessment_top"><span >Submit</span></button></div>
+        </div>
+        </div>
+      </form>
+      <div class="col-md-3 col-sm-4">
+        <div class="category_desc">
+          <div class="border_div">
+          <h2>Feedback Category Description</h2>
+          </div>
+          <div class="content_div">
+          <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    
+              <div class="panel panel-default" *ngFor="let cat of categoryList; let i=index;">
+                  <div class="panel-heading" role="tab" id="heading{{i}}" *ngIf="cat.count>0">
+                    <h4 class="panel-title"> <a role="button" [ngClass]="{collapsed:(i!=0)}" data-toggle="collapse" data-parent="#accordion" href="#collapse{{i}}" aria-expanded="true" aria-controls="collapseOne"> <span class="icon_span"></span>{{cat.Name}}</a> </h4>
+                  </div>
+                  <div *ngIf="cat.count>0" id="collapse{{i}}" class="panel-collapse collapse" [ngClass]="{in:(i==0)}" role="tabpanel" aria-labelledby="headingOne">
+                    <div class="panel-body">{{cat.Description}}</div>
+                  </div>
+              </div>
+            
+          </div>
+          </div>
+        </div>
+        </div>
+      </div>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+    <div class="clearfix"></div>
+    <!-- End Assessment Section --> 	
+
+<!-- Preview Popup -->
+<div class="modal fade" id="PreviewModal" tabindex="-1" role="dialog" aria-labelledby="PreviewModal" >
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="myModalLabel">Feedback Review</h3>
+      </div>
+      <div class="modal-body">
+        <div class="scroll_preview">
+      <table id="preview_table" class=" table-striped table table-hover table-bordered" style="width:100%">
+      <thead>
+            <tr>
+                <th class="text-center width_5">No.</th>
+                <th class="width_60">Question</th>
+                <th class="text-left width_30">Response</th>
+            </tr>
+          </thead>
+      <tbody>
+          <ng-container *ngFor="let question of QuestionList; let k=index;">
+              <tr *ngFor="let que of question.row; let i=index;">
+                <td class="text-center width_5">{{(3*k)+i+1}}</td>
+                <td class="width_60">{{que.Name}}</td>
+                <td class="text-left width_30">
+                  <span *ngFor="let ans of que.answer;"><span *ngIf="ans.FeedbackAnswerId==que.FeedbackAnswerId">{{ans.Name}}</span></span>
+                </td>
+              </tr>     
+          </ng-container>           
+          </tbody>
+        </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <p><strong>Are your final responses correct?</strong></p>
+        <button type="button" class="next_btn" (click)="save()">Yes</button>
+        <button type="button" class="back_btn" data-dismiss="modal">No</button>
+      </div>
+    </div>
+  </div>
+  </div>
+  <!-- End Preview Popup --> 
+  
+  
+  <!-- Description Popup -->
+<div class="modal fade" id="DescriptionModal" tabindex="-1" role="dialog" aria-labelledby="DescriptionModal" >
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="myModalLabel">Welcome to the Straehle Feedback Inventory (SFI) Demo</h3>
+      </div>
+      <div class="modal-body">
+		  <p class="padding_15">The SFI is a scientifically sound, evidence-based inventory that measures how employees deliver and receive feedback. This instrument has been designed as a valid, reliable, and fair self-report inventory that can deliver direct results and quantifiable solutions. Instead of guessing at how your organization can improve, we can uncover your results with our specially designed score reports and our personalized training programs. We understand your strengths and areas of opportunity, and analyze it to fit you.</p>
+		  <p>For more technical information about the Straehle Feedback Inventory, please <a href="images/TechnicalStraehleFeedbackInventorySheet.pdf" target="_blank">click here</a>.</p>
+      </div>
+      <div class="modal-footer">
+		  <button type="button" class="back_btn" (click)="startTour()" data-dismiss="modal">Tour Guide</button>
+        <button type="button" class="next_btn" data-dismiss="modal">Skip</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Description Popup --> 

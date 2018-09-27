@@ -1,0 +1,95 @@
+<div class="grey_content">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 col-sm-12 col-md-offset-2">
+		<div class="row">
+		<div class="col-md-12 col-sm-12 col-xs-12">
+          <h1 class="pull-left">{{header}} Feedback Answer</h1>
+            <!-- <div class="alert alert-{{globals.type}}" role="alert" *ngIf="globals.msgflag">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+            {{globals.message}}
+            </div> -->
+			<div class="btn-group pull-right add-right">
+                        <a routerLink="/answer/list" class="btn btn-danger btn-add">
+                        <i class="fa fa-reply fa-fw"></i> Back
+                        </a>
+                  </div>
+				  </div>
+				  </div>
+          <div class="white_box">
+                
+                  <div class="clearfix"></div>
+                          <form #answerForm="ngForm" (ngSubmit)="addanswer(answerForm)">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12 col-xs-12">
+                                    <div class="form-group">
+                                  <label><span>*</span>Feedback Answer</label>
+                                  <input type="text" class="form-control" #Name="ngModel" [(ngModel)]="answerEntity.Name" name="Name" pattern="[a-zA-Z'\-&\ ]{2,}" maxlength="100" [ngClass]="{red_border: (Name.dirty && Name.invalid) || (Name.pristine && submitted)}" required/>  
+                                  <span class="error_span" *ngIf="(Name.dirty && Name.invalid) || (Name.pristine && submitted)"> 
+                                    <span *ngIf="Name.errors.required || (Name.pristine && submitted)">Please enter Feedback Answer</span>
+                                    <span *ngIf="Name.errors && Name.errors.pattern"> Please enter valid Feedback Answer</span>
+                                </span>
+                                </div>
+                                </div>
+                                <div class="col-md-6 col-sm-12 col-xs-12">
+                                    <div class="form-group">
+                                    <label><span>*</span>Answer Value</label>
+                                    <input disabled type="text" class="form-control" #Value="ngModel" [(ngModel)]="answerEntity.Value" name="Value" pattern="[0-9\s]{1,2}" maxlength="2" [ngClass]="{red_border: (Value.dirty && Value.invalid) || (Value.pristine && submitted)}" required/>  
+                                    <span class="error_span" *ngIf="(Value.dirty && Value.invalid) || (Value.pristine && submitted)"> 
+                                      <span *ngIf="Value.errors.required || (Value.pristine && submitted)">Please enter Answer Value</span>
+                                      <span *ngIf="Value.errors && Value.errors.pattern">Please enter valid Answer Value</span>
+                                  </span>
+                                  </div>
+                                  </div>
+                                  <div class="clearfix"></div>
+                                  <div class="col-md-6 col-sm-12 col-xs-12">
+                                    <div class="form-group">
+                                    <label><span>*</span>Answer Reverse Value</label>
+                                    <input disabled type="text" class="form-control" #ReverseValue="ngModel" [(ngModel)]="answerEntity.ReverseValue" name="ReverseValue" pattern="[0-9\s]{1,2}" maxlength="2" [ngClass]="{red_border: (ReverseValue.dirty && ReverseValue.invalid) || (ReverseValue.pristine && submitted)}" required/>  
+                                    <span class="error_span" *ngIf="(ReverseValue.dirty && ReverseValue.invalid) || (ReverseValue.pristine && submitted)"> 
+                                      <span *ngIf="ReverseValue.errors.required || (ReverseValue.pristine && submitted)">Please enter Answer Reverse Value</span>
+                                      <span *ngIf="ReverseValue.errors && ReverseValue.errors.pattern">Please enter valid Answer Reverse Value</span>
+                                  </span>
+                                  </div>
+                                  </div>
+                                  <div class="col-md-6 col-sm-12 col-xs-12">
+                                    <div class="form-group1">
+                                  <label><span>*</span>Active?</label>
+            <div class="radiobtn_box">
+              <input disabled type="radio"  name="IsActive" id="role1" value="1" #IsActive="ngModel" [(ngModel)]="answerEntity.IsActive" required/>
+              <label for="role1">Yes</label>
+            </div>
+                 <div class="radiobtn_box" *ngIf="answerEntity.FeedbackAnswerId==0 || answerEntity.isdisabled==0"  >
+                <input disabled type="radio" name="IsActive" id="role2" value="0" #IsActive="ngModel" [(ngModel)]="answerEntity.IsActive" required/>
+                <label for="role2">No </label>
+              </div>
+              <div class="inline_btn tooltip_inline"  data-toggle="tooltip" data-placement="bottom" title="You can’t deactivate answer as it has been already used in sub-answer" > 
+                <div class="radiobtn_box" *ngIf="answerEntity.FeedbackAnswerId>0 && answerEntity.isdisabled>0"    >
+                    <input disabled type="radio" name="IsActive" id="role2" value="0" #IsActive="ngModel" [(ngModel)]="answerEntity.IsActive" required/>
+                   <label for="role2">No </label>
+               
+                 </div>
+              </div>
+           
+            <span class="error_span" *ngIf="(IsActive.dirty && IsActive.invalid) || (IsActive.pristine && submitted)"> 
+                <span *ngIf="IsActive.errors.required || (IsActive.pristine && submitted)">Please select Active Status</span>
+              </span>
+
+                              </div>
+                              </div>
+          <div class="clearfix"></div>
+          <div class="text-center">
+            <button type="submit" [disabled]="btn_disable" class="next_btn"><span>Submit</span></button>
+            <button type="button" *ngIf="answerEntity.FeedbackAnswerId==0" (click)="clearForm(answerForm)" class="back_btn"><span>Clear</span></button>
+            
+        </div>
+        </div>
+    </form>
+</div>
+</div>
+<!--</div>-->
+</div>
+<!-- End Form Elements -->
+</div>
+</div>
+<div class="clearfix"></div>

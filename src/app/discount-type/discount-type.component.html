@@ -1,0 +1,131 @@
+<div class="grey_content">
+  <div class="container">
+    <div class="row">
+    <div class="col-md-10 col-sm-12 col-md-offset-2">
+	<div class="row">
+		<div class="col-md-12 col-sm-12">
+		 <h1 class="pull-left">{{header}} Discount Type</h1>
+            <div class="btn-group pull-right add-right">
+            <a routerLink="/discount-type/list" class="btn btn-danger btn-add">
+            <i class="fa fa-reply fa-fw"></i> Back
+            </a>
+          </div>
+		</div>
+         </div>
+	
+	
+      <!-- <div class="alert alert-{{globals.type}}" role="alert" *ngIf="globals.msgflag">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+      {{globals.message}}
+      </div> -->
+      <div class="white_box">
+      
+          <div class="clearfix"></div>
+                       <form #DiscountTypeForm="ngForm" (ngSubmit)="addDiscountType(DiscountTypeForm)">
+                        <div class="row">
+                          <div class="col-md-6 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                                <label><span>*</span>Name</label>
+                                <input type="text" disabled  #Value="ngModel" pattern="[a-zA-Z0-9/!@#$%^*()., ]{2,}" maxlength="100" [(ngModel)]="DiscountTypeEntity.Value" class="form-control"
+                                name="Value"  [ngClass]="{red_border: (Value.dirty && Value.invalid) || (Value.pristine && submitted)}" required/>		
+                                <span class="error_span" *ngIf="(Value.dirty && Value.invalid) || (Value.pristine && submitted)">
+                                    <span *ngIf="Value.errors && Value.errors.required">
+                                      Please enter discount-type
+                                    </span>
+                                    
+                                    <span *ngIf="Value.errors && Value.errors.pattern">
+                                      Please enter valid discount-type
+                                    </span>
+                                </span>
+                              </div>
+                            </div>
+
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                    <label><span>*</span>Display Name</label>
+                                    <input type="text"  #DisplayText="ngModel" pattern="[a-zA-Z0-9'\-&\ ]{2,}" maxlength="100" [(ngModel)]="DiscountTypeEntity.DisplayText" class="form-control"
+                                    name="DisplayText"  [ngClass]="{red_border: (DisplayText.dirty && DisplayText.invalid) || (DisplayText.pristine && submitted)}" required/>		
+                                    <span class="error_span" *ngIf="(DisplayText.dirty && DisplayText.invalid) || (DisplayText.pristine && submitted)">
+                                        <span *ngIf="DisplayText.errors && DisplayText.errors.required">
+                                          Please enter Display Name
+                                        </span>
+                                        
+                                        <span *ngIf="DisplayText.errors && DisplayText.errors.pattern">
+                                          Please enter valid Display Name
+                                        </span>
+                                    </span>
+                                  </div>
+                                </div>
+                              
+          <div class="clearfix"></div>
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group">
+                                  <label>Description</label>
+                               
+                                  <textarea type="text" class="form-control" #Description="ngModel" [(ngModel)]="DiscountTypeEntity.Description" name="Description" ></textarea>
+                                  <!-- <span class="error_span" *ngIf="(Description.dirty && Description.invalid) || (Description.pristine && submitted)"> 
+                                    <span *ngIf="Description.errors.required || (Description.pristine && submitted)">Please enter description</span>
+                                    <span *ngIf="Description.errors && Description.errors.pattern">Please enter valid description</span>
+                                  </span> -->
+                              </div>
+                              </div>
+                              <div class="col-md-6 col-sm-12 col-xs-12">
+                                  <div class="form-group">
+                                    <label>Display Order</label>
+                                 
+              <input type="text"  #DisplayOrder="ngModel" pattern="[0-9]{1,4}" maxlength="4"   [(ngModel)]="DiscountTypeEntity.DisplayOrder" class="form-control"
+              name="DisplayOrder" [ngClass]="{red_border: (DisplayOrder.dirty && DisplayOrder.invalid)}"/>
+              <span class="error_span" *ngIf="(DisplayOrder.dirty && DisplayOrder.invalid)">
+                <span *ngIf="DisplayOrder.errors && DisplayOrder.errors.pattern">
+                  Please enter valid Display Order
+                </span>
+              </span>
+                                </div>
+                                </div>
+                             <div class="clearfix"></div>
+                              <div class="col-md-6 col-sm-12 col-xs-12">
+                                <div class="form-group1">
+                        <label><span>*</span>Active?</label>
+                    
+        
+        <div class="radiobtn_box">
+          <input type="radio" disabled name="IsActive" id="role1" value="1" #IsActive="ngModel" [(ngModel)]="DiscountTypeEntity.IsActive" required/>
+          <label for="role1">Yes</label>
+        </div>
+        <div class="inline_btn tooltip_inline"  data-toggle="tooltip" data-placement="bottom" title="You can’t deactivate Discount Type" > 
+        <div class="radiobtn_box"  *ngIf="DiscountTypeEntity.ConfigurationId==0 || DiscountTypeEntity.isdisabled==0"  >
+          <input type="radio" disabled name="IsActive" id="role2" value="0" #IsActive="ngModel" [(ngModel)]="DiscountTypeEntity.IsActive" required/>
+          <label for="role2">No </label>
+          </div>
+          </div>
+          <div class="inline_btn tooltip_inline"  data-toggle="tooltip" data-placement="bottom" title="You can’t deactivate Discount Type" > 
+          <div class="radiobtn_box" *ngIf="DiscountTypeEntity.ConfigurationId>0 && DiscountTypeEntity.isdisabled>0"    >
+            <input type="radio"  disabled name="IsActive" id="role2" value="0" #IsActive="ngModel" [(ngModel)]="DiscountTypeEntity.IsActive" required/>
+             <label for="role2">No </label>
+           
+           </div>
+          </div>
+
+       
+        <span class="error_span" *ngIf="(IsActive.dirty && IsActive.invalid) || (IsActive.pristine && submitted)"> 
+          <span *ngIf="IsActive.errors.required || (IsActive.pristine && submitted)">Please select Active Status</span>
+          </span>
+
+                    </div>
+                    </div>
+                   
+          <div class="clearfix"></div>
+          <div class="text-center">
+            <button type="submit" [disabled]="btn_disable" class="next_btn"><span>Submit</span></button>
+            <button type="button" *ngIf="DiscountTypeEntity.ConfigurationId==0" (click)="clearForm(DiscountTypeForm)" class="back_btn"><span>Clear</span></button>
+          </div>
+        </div>
+                        </form>
+    </div>
+    </div>
+    <!--</div>-->
+    </div>
+    <!-- End Form Elements -->
+    </div>
+    </div>
+    <div class="clearfix"></div>

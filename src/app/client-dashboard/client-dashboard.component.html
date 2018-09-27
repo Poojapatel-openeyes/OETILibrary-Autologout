@@ -1,0 +1,134 @@
+<!-- Form Section -->
+<div class="grey_content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-sm-12 col-md-offset-2">
+        <h1>Dashboard</h1>
+        <div class="row">
+			<div class="col-md-6 col-sm-6">
+			<div class="dashboard_box">
+			  	<div class="red_block"><h4>Users</h4>
+				<div id="feedback_chart" class="chart_block"></div>
+				</div>
+				<div class="white_block">
+					<div class="box"><i class="fa fa-user-plus"></i>
+						<div class="title">Registered<br>User</div>
+						<div class="number">{{registered_user}}</div>
+					</div>
+					<div class="box"><i class="fa fa-commenting-o"></i>
+						<div class="title">Completed Feedback</div>
+						<div class="number">{{total_feedback}}</div>
+					</div>
+					<div class="box"><i class="fa fa-calendar"></i>
+						<div class="title">Incomplete Feedback</div>
+						<div class="number">{{incomplete_feedback}}</div>
+					</div>
+				</div>
+			</div>
+			</div>
+			<div class="col-md-6 col-sm-6">
+			<div class="dashboard_box">
+			  	<div class="red_block"><h4>Licenses</h4>
+				<div id="license_chart" class="chart_block"></div>
+				</div>
+				<div class="white_block">
+					<div class="box"><i class="fa fa-key"></i>
+						<div class="title">Total<br>Licenses</div>
+						<div class="number">{{total_licenses}}</div>
+					</div>
+					<div class="box"><i class="fa fa-user-plus"></i>
+						<div class="title">Assigned<br>Licenses</div>
+						<div class="number">{{assign_licenses}}</div>
+					</div>
+					<div class="box"><i class="fa fa-calendar-times-o"></i>
+						<div class="title">Remaining<br>Licenses</div>
+						<div class="number">{{remaining_licenses}}</div>
+					</div>
+				</div>
+			</div>
+			</div>
+			<div class="clearfix"></div>
+          <div class="col-md-6 col-sm-6">
+				<div class="white_box">
+						<div class="title_block">	
+								<div class="pull-left">
+									<h4>Invited Users</h4>
+								</div>
+								<div class="pull-right">
+									<a class="next_btn" href="/user-invitelist"><i class="fa fa-eye"></i>View All</a>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+				<div class="client_tbl">
+				<div class="table-responsive">
+				<table class="table table-hover table-bordered">
+                <thead>
+                  <tr>
+											<th>Invitation Date</th>
+					<th>Email Address</th>					
+					<th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of userlist; let i=index;">
+												<td>{{user.CreatedOn | date:'MM/dd/yyyy'}}</td>
+                        <td>{{user.EmailAddress}}</td>                        
+              <td><span *ngIf="user.StatusId==0" class="success_status">{{status.Success}}</span>
+                <span *ngIf="user.StatusId==1" class="pending_status">{{status.Pending}}</span>
+                <span *ngIf="user.StatusId==2" class="revoke_status">{{status.Revoke}}</span>
+              </td>
+											</tr>
+											<tr *ngIf="userlist.length<=0">
+												<td colspan="4" class="text-center">There is no record found</td>
+											</tr>
+                </tbody>
+              </table>
+			  </div>
+			  </div>
+			  </div>
+			</div>
+			<div class="col-md-6 col-sm-6">
+				<div class="white_box">
+					<div class="title_block">	
+							<div class="pull-left">
+								<h4>Feedback Submitted</h4>
+							</div>
+							<div class="pull-right">
+								<a class="next_btn" href="/user-feedback-report"><i class="fa fa-eye"></i>View All</a>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+				<div class="client_tbl">
+				<div class="table-responsive">
+				<table class="table table-hover table-bordered">
+                <thead>
+                  <tr>
+											<th>Feedback Date</th>
+                    <th>Name</th>
+                    <th>Email Address</th>                    
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let fb of feedbacklist; let i=index;">
+											<td>{{fb.EndDateTime | date:'MM/dd/yyyy'}}</td>
+					          <td>{{fb.Name}}</td>
+                    <td>{{fb.EmailAddress}}</td>                    
+                  </tr>
+									<tr *ngIf="feedbacklist.length<=0">
+										<td colspan="4" class="text-center">There is no record found</td>
+									</tr>
+                </tbody>
+              </table>
+			  </div>
+			  </div>
+			  </div>
+			</div>
+			<div class="clearfix"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+</div>
+<div class="clearfix"></div>
+<!-- End Form Section --> 

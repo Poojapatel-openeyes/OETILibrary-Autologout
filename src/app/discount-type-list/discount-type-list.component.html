@@ -1,0 +1,94 @@
+<div class="grey_content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-sm-12 col-md-offset-2">
+        <h1>Discount Type</h1>
+          <div class="alert alert-{{globals.type}}" role="alert" *ngIf="globals.msgflag">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+            {{globals.message}}
+          </div>
+        <div class="white_box">
+      <div class="buttons_block">
+        <!-- <a routerLink="/discount-type/add" class="next_btn"><i class="fa fa-plus"></i>Add a Discount Type</a> -->
+        <div id="buttons" class="pull-right"></div>
+        <div class="clearfix"></div>
+      </div>
+          <table id="list_tables" class="table table-hover" style="width:100%">
+            <thead>
+                <tr>
+                  <th class="tbl1_width">No.</th>
+                  <th>Name</th>
+                  <th>Display Name</th>
+                  <th>Description</th>
+                  <th class="text-right">Display Order</th>
+                  <th class="tbl_width text-center">Active?</th>
+                  <th *ngIf="permissionEntity.AddEdit==1 || permissionEntity.Delete==1" class="print_none tbl_width text-center">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+              
+
+               <tr class="odd gradeX" *ngFor="let discount_type of DiscountTypeList;let i = index">
+                  <td>{{i+1}}</td>
+                  <td>{{discount_type.Value}}</td>
+                  <td>{{discount_type.DisplayText}}</td>
+                  <td>{{discount_type.Description}}</td>
+                  <td class="text-right">{{discount_type.DisplayOrder}}</td>
+                    <!-- <td *ngIf="discount_type.IsActive=='1'">Yes</td>
+                    <td *ngIf="discount_type.IsActive=='0'">No</td> -->
+                    <td class="text-center">
+                      <!-- <div class="activeyes_box" *ngIf="discount_type.isdisabled==0" data-toggle="tooltip" data-placement="top" title="Deactive">
+                      <input type="checkbox" name="active1" id="active{{i}}" (change)="isActiveChange(discount_type,i)" [checked]="discount_type.IsActive==1" value="Yes" >
+                      <label for="active{{i}}"></label>
+                    </div>
+                    <div *ngIf="discount_type.isdisabled>0" class="activeyes_box" data-toggle="tooltip" data-placement="top" title="You can’t deactivate Discount Type as it has been already used in Discount">
+                        <input type="checkbox" name="active1" [disabled]="discount_type.isdisabled>0" id="active{{i}}" (change)="isActiveChange(discount_type,i)" [checked]="discount_type.IsActive==1" value="Yes" >
+                        <label for="active{{i}}"></label>
+                    </div> -->
+                    <div class="activeyes_box" *ngIf="discount_type.isdisabled==0" data-toggle="tooltip" data-placement="top" title="You can’t deactivate Discount Type">
+                        <input type="checkbox" name="active1" [disabled]="true" id="active{{i}}" (change)="isActiveChange(discount_type,i)" [checked]="discount_type.IsActive==1" value="Yes" >
+                        <label for="active{{i}}"></label>
+                      </div>
+                      <div *ngIf="discount_type.isdisabled>0" class="activeyes_box" data-toggle="tooltip" data-placement="top" title="You can’t deactivate Discount Type">
+                          <input type="checkbox" name="active1" [disabled]="true" id="active{{i}}" (change)="isActiveChange(discount_type,i)" [checked]="discount_type.IsActive==1" value="Yes" >
+                          <label for="active{{i}}"></label>
+                      </div>
+                  </td>
+                    <td class="print_none text-center"  *ngIf="permissionEntity.AddEdit==1 || permissionEntity.Delete==1">
+                      <div class="inline_delbtn tooltip_inline"> 
+                            <button   data-toggle="tooltip" data-placement="top"   title="Edit"  *ngIf="permissionEntity.AddEdit==1" class="edit" routerLink="/discount-type/edit/{{discount_type.ConfigurationId}}" > <i class="fa fa-edit"></i> </button>
+                       </div>
+                       <!-- <div *ngIf="(permissionEntity.Delete==1) && (discount_type.isdisabled>0)" class="inline_delbtn tooltip_inline" data-toggle="tooltip" data-placement="top"  title="You can’t delete Discount Type as it is used in state already"> 
+                       <button  [disabled]="discount_type.isdisabled>0"   (click)="deleteDiscountType(discount_type)"  class="delete"> <i class="fa fa-trash"></i> </button>
+                       </div>
+                       <div *ngIf="(permissionEntity.Delete==1) && (discount_type.isdisabled==0)" class="inline_delbtn tooltip_inline"> 
+                       <button   data-toggle="tooltip" data-placement="top"   title="Delete"  (click)="deleteDiscountType(discount_type)"  class="delete"> <i class="fa fa-trash"></i> </button>
+                       </div> -->
+                      </td>
+                  
+                      </tr>
+                      <tr *ngIf="DiscountTypeList.length<=0">
+                        <td colspan="7" class="text-center">There is no record found</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <!--End Advanced Tables --> 
+          </div>
+        </div>
+
+<!-- <div class="modal fade bs-example-modal-sm"  id="Delete_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+        <div class="modal-body">
+            <p>Are you sure you want to remove this Discount Type?</p>
+          </div>
+          <div class="modal-footer text-center">
+            <button type="button" class="next_btn" (click)="deleteConfirm(deleteEntity)" id="yes_btn"><span>Yes</span></button>
+            <button type="button" class="back_btn" data-dismiss="modal"><span>No</span></button>
+        </div>
+    </div>
+</div>
+</div> -->

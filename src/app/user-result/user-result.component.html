@@ -1,0 +1,296 @@
+<!-- Thank You Section -->
+<div class="thankyou_content grey_content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 col-sm-12">
+		  <div class="row">
+			<div class="col-md-12 col-sm-12">
+				<div class="row">
+					<div class="result_tab">
+						<div class="col-md-3 col-sm-4">
+							<h1>Results</h1>
+						</div>
+						<div class="col-md-9 col-sm-8">
+						  <ul class="nav nav-tabs " role="tablist">
+							  <li *ngFor="let cat of maincatlist; let i=index; let f=first;" [ngClass]="{active:f}"><a href="#feedback{{i}}" aria-controls="deliveringfeedback" role="tab" data-toggle="tab">{{cat.Name}} </a></li>
+						  </ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		  </div>        
+        <div class="clearfix"></div>
+        <div class="row">
+          <div class="tab-content">
+              <div role="tabpanel" *ngFor="let cat of maincatlist; let i=index; let f=first;" class="tab-pane" [ngClass]="{active:f}" id="feedback{{i}}">
+                  <div class="col-md-3 col-sm-4">
+                    <div class="result_left">
+                      <div class="diagram_title">
+                        <h2>{{cat.Name}}</h2>
+                        <div class="circle main_circle" id="circle{{i}}"><strong></strong></div>
+                      </div>
+                      <p *ngIf="cat.score==0 || cat.score==1 || (cat.score > 0 && cat.score < 1)">Based on your Total {{cat.Name}} Feedback Score, you deliver feedback <strong>very ineffectively</strong>. Below are your scores across the four delivering feedback areas and recommendations for improvements.</p>
+                      <p *ngIf="cat.score==2 || (cat.score > 1 && cat.score < 2)">Based on your Total {{cat.Name}} Feedback Score, you deliver feedback <strong>ineffectively</strong>. Below are your scores across the four delivering feedback areas and recommendations for improvements.</p>
+                      <p *ngIf="cat.score==3 || (cat.score > 2 && cat.score < 3)">Based on your Total {{cat.Name}} Feedback Score, you deliver feedback <strong>effectively</strong>. Below are your scores across the four delivering feedback areas and recommendations for improvements.</p>
+                      <p *ngIf="cat.score==4 || (cat.score > 3 && cat.score < 4)">Based on your Total {{cat.Name}} Feedback Score, you deliver feedback very <strong>very effectively</strong>. Below are your scores across the four delivering feedback areas.</p>
+                      <!-- <p *ngIf="cat.score==5 || (cat.score > 4 && cat.score < 5)">4.5 Based on your Delivering Feedback Results, you deliver feedback <strong>very effectively</strong>. 
+                        Below are your scores across the four delivering feedback areas.</p> -->
+                      <div class="clearfix"></div>
+                    </div>
+                  </div>
+                  <div class="col-md-9 col-sm-8">
+                    <div class="result_right">
+                      <div class="feedback_category">
+                        <div class="row" *ngFor="let subcat of cat.child; let j=index; let even=even; let odd=odd">
+                          <div class="feedback_row" *ngIf="even">
+                            <div class="feedback_right">
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="circle" id="subcircle{{i}}{{j}}"><strong></strong></div>
+                              </div>
+                            </div>
+                            <div class="feedback_left">
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="feedback_desc">
+                                  <h3>{{subcat.Name}}</h3>
+                                  <p *ngIf="subcat.score==0 || subcat.score==1 || (subcat.score > 0 && subcat.score < 1)">Based on your score, you <strong>never</strong> deliver feedback where you provide the individual {{subcat.Name}} moments. You should improve on increasing your {{subcat.Name}} feedback skills by providing the individual opportunities to ask about the feedback you delivered, reinforce the feedback and/or guidance on helping the individual improve.</p>
+                                  <p *ngIf="subcat.score==2 || (subcat.score > 1 && subcat.score < 2)">Based on your score, you <strong>rarely</strong> deliver feedback where you provide the individual {{subcat.Name}} moments. You should improve on increasing your {{subcat.Name}} feedback skills by  providing the individual opportunities to ask about the feedback you delivered, reinforce the feedback and/or guidance on helping the individual improve.</p>
+                                  <p *ngIf="subcat.score==3 || (subcat.score > 2 && subcat.score < 3)">Based on your score, you <strong>Occasionally</strong> deliver feedback where you provide the individual {{subcat.Name}} moments. You should improve on increasing your {{subcat.Name}} feedback skills by providing the individual opportunities to ask about the feedback you delivered, reinforce the feedback and/or guidance on helping the individual improve.</p>
+                                  <p *ngIf="subcat.score==4 || (subcat.score > 3 && subcat.score < 4)">Based on your score, you <strong>always or frequently</strong> deliver feedback where you provide the individual {{subcat.Name}} moments</p>
+                                  <!-- <p *ngIf="subcat.score==5 || (subcat.score > 4 && subcat.score < 5)">Based on your score, you <strong>Occasionally</strong> deliver feedback where you provide the individual opportunities and coaching moments. You should improve on increasing your opportunistic coaching feedback skills by providing the individual opportunities to ask about the feedback you delivered, reinforce the feedback and/or guidance on helping the individual improve.</p> -->
+                                </div>
+                              </div>
+                            </div>
+                            <div class="clearfix"></div>
+                          </div>
+                          <div class="feedback_row" *ngIf="odd">                           
+                            <div class="feedback_right">
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="feedback_desc">
+                                  <h3>{{subcat.Name}}</h3>
+                                  <p *ngIf="subcat.score==0 || subcat.score==1 || (subcat.score > 0 && subcat.score < 1)">Based on your score, you <strong>never</strong> deliver feedback where you provide the individual {{subcat.Name}} moments. You should improve on increasing your {{subcat.Name}} feedback skills by providing the individual opportunities to ask about the feedback you delivered, reinforce the feedback and/or guidance on helping the individual improve.</p>
+                                  <p *ngIf="subcat.score==2 || (subcat.score > 1 && subcat.score < 2)">Based on your score, you <strong>rarely</strong> deliver feedback where you provide the individual {{subcat.Name}} moments. You should improve on increasing your {{subcat.Name}} feedback skills by  providing the individual opportunities to ask about the feedback you delivered, reinforce the feedback and/or guidance on helping the individual improve.</p>
+                                  <p *ngIf="subcat.score==3 || (subcat.score > 2 && subcat.score < 3)">Based on your score, you <strong>Occasionally</strong> deliver feedback where you provide the individual {{subcat.Name}} moments. You should improve on increasing your {{subcat.Name}} feedback skills by providing the individual opportunities to ask about the feedback you delivered, reinforce the feedback and/or guidance on helping the individual improve.</p>
+                                  <p *ngIf="subcat.score==4 || (subcat.score > 3 && subcat.score < 4)">Based on your score, you <strong>always or frequently</strong> deliver feedback where you provide the individual {{subcat.Name}} moments</p>
+                                  <!-- <p *ngIf="subcat.score==5 || (subcat.score > 4 && subcat.score < 5)">Based on your score, you <strong>Occasionally</strong> deliver feedback where you provide the individual opportunities and coaching moments. You should improve on increasing your opportunistic coaching feedback skills by providing the individual opportunities to ask about the feedback you delivered, reinforce the feedback and/or guidance on helping the individual improve.</p> -->
+                                </div>
+                              </div>
+                            </div>
+                            <div class="feedback_left">
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="circle" id="subcircle{{i}}{{j}}"><strong></strong></div>
+                              </div>
+                            </div>
+                            <div class="clearfix"></div>
+                          </div>
+
+                        </div>
+                        <div class="clearfix"></div>
+                      </div>
+                      <div class="clearfix"></div>
+                    </div>
+                  </div>
+                </div>
+            <!-- <div role="tabpanel" class="tab-pane active" id="deliveringfeedback">
+              <div class="col-md-3 col-sm-3">
+                <div class="result_left">
+                  <div class="diagram_title">
+                    <h2>Delivering Feedback </h2>
+                    <div class="circle" id="delivering_circle"><strong></strong></div>
+                  </div>
+                  <p>Based on your Delivering Feedback Results, you deliver feedback <strong>very effectively</strong>. 
+                    Below are your scores across the four delivering feedback areas.</p>
+                  <div class="clearfix"></div>
+                </div>
+              </div>
+              <div class="col-md-9 col-sm-9">
+                <div class="result_right">
+                  <div class="feedback_category">
+                    <div class="row">
+                      <div class="feedback_row">
+						<div class="feedback_right">
+							<div class="col-md-6 col-sm-6 col-xs-12">
+							  <div class="circle" id="Opportunistic_circle"><strong></strong></div>
+							</div>
+						</div>
+						<div class="feedback_left">
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<div class="feedback_desc">
+									<h3>Opportunistic Coaching Feedback</h3>
+									<p>Based on your score, you <strong>Occasionally</strong> deliver feedback where you provide the individual opportunities and coaching moments. You should improve on increasing your opportunistic coaching feedback skills by providing the individual opportunities to ask about the feedback you delivered, reinforce the feedback and/or guidance on helping the individual improve.</p>
+								</div>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="row">
+                      <div class="feedback_row grey_box">
+						<div class="feedback_right">
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<div class="feedback_desc">
+									<h3>Empathetic Feedback</h3>
+									<p>Based on your score, you <strong>Rarely</strong> deliver feedback where you consider and understand the individuals' situations and experiences from their perspective. You should improve on increasing your empathetic feedback skills by considering the other person's situations or stepping into their world ("shoes") to help deliver feedback more effectively.</p>
+								</div>
+							</div>
+						</div>
+						<div class="feedback_left">
+							<div class="col-md-6 col-sm-6 col-xs-12">
+							  <div class="circle" id="Empathetic_circle"><strong></strong></div>
+							</div>
+						</div>						
+						<div class="clearfix"></div>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="row">
+                      <div class="feedback_row">
+						<div class="feedback_right">
+							<div class="col-md-6 col-sm-6 col-xs-12">
+							  <div class="circle" id="Progressive_circle"><strong></strong></div>
+							</div>
+						</div>
+						<div class="feedback_left">
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<div class="feedback_desc">
+								  <h3>Progressive Feedback</h3>
+								  <p>Based on your score, you <strong>Always Or Frequently</strong> deliver feedback to find ways to improve and monitor the feedback by showing the individual areas to improve, finding and encouraging external supports, monitoring and recording progress, and scheduling time to follow-up about the feedback.</p>
+								</div>
+							</div>
+						</div>
+						  <div class="clearfix"></div>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="row">
+                      <div class="feedback_row grey_box">
+						<div class="feedback_right">
+							<div class="col-md-6 col-sm-6 col-xs-12">
+								<div class="feedback_desc">
+								  <h3>Active Communication Feedback</h3>
+								  <p>Based on your score, you <strong>Always Or Frequently</strong> deliver feedback where you use active communication listening skills. You display this by using clear and succinct communication and pay close attention and observe the individual's reaction while assessing your own self including effectively using your body language and tone.</p>
+								</div>
+							</div>
+						</div>
+						<div class="feedback_left">
+							<div class="col-md-6 col-sm-6 col-xs-12">
+							  <div class="circle" id="Communication_circle"><strong></strong></div>
+							</div>
+						</div>
+						  <div class="clearfix"></div>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="clearfix"></div>
+                </div>
+              </div>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="receivingfeedback">
+              <div class="col-md-3 col-sm-3">
+                <div class="result_left">
+                  <div class="diagram_title">
+                    <h2>Receiving Feedback </h2>
+                    <div class="circle" id="receiving_circle"><strong></strong></div>
+                  </div>
+                  <p>Based on your Delivering Feedback Results, you deliver feedback <strong>very effectively</strong>. 
+                    Below are your scores across the four delivering feedback areas.</p>
+                  <div class="clearfix"></div>
+                </div>
+              </div>
+              <div class="col-md-9 col-sm-9">
+                <div class="result_right">
+                  <div class="feedback_category">
+                    <div class="row">
+                      <div class="feedback_row">
+					  <div class="feedback_right">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <div class="circle" id="Regulation_circle"><strong></strong></div>
+                        </div>
+					</div>
+					<div class="feedback_left">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <h3>Self-Regulation Feedback</h3>
+                          <p>Based on your score, when you receive feedback, you ,<strong>Always Or Frequently</strong> use the feedback to effectively manage work goals while regulating your behaviors and emotions skillfully to ultimately improve and succeed at your job.</p>
+                        </div>
+					</div>
+						  <div class="clearfix"></div>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="row">
+                      <div class="feedback_row grey_box">
+					  <div class="feedback_right">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <h3>Reactive Feedback</h3>
+                          <p>Based on your score, when you receive feedback, you are <strong>Never</strong> surprised, overwhelmed, irritated, and/or resistant to it.</p>
+                        </div>
+					</div>
+					<div class="feedback_left">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <div class="circle" id="Reactive_circle"><strong></strong></div>
+                        </div>
+					</div>
+						  <div class="clearfix"></div>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="row">
+                      <div class="feedback_row">
+					  <div class="feedback_right">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <div class="circle" id="Contingent_circle"><strong></strong></div>
+                        </div>
+					</div>
+						<div class="feedback_left">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <h3>Contingent Feedback</h3>
+                          <p>Based on your score, when you receive feedback, you <strong>Always Or Frequently</strong> use the feedback when certain conditions are met such who is delivering the feedback, the type of feedback (e.g., constructive), and how quickly the feedback is delivered after evaluating a task.</p>
+                        </div>
+					</div>
+						  <div class="clearfix"></div>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="row">
+                      <div class="feedback_row grey_box">
+					  <div class="feedback_right">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <h3>Solicitation Feedback</h3>
+                          <p>Based on your score, when you receive feedback, you <strong>Always Or Frequently</strong> use the feedback by asking questions to the individual delivering the feedback or others to gain further clarity about it.</p>
+                        </div>
+					</div>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <div class="circle" id="Solicitation_circle"><strong></strong></div>
+                        </div>
+						  <div class="clearfix"></div>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="row">
+                      <div class="feedback_row">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <div class="circle" id="Evidential_circle"><strong></strong></div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <h3>Evidential Feedback</h3>
+                          <p>Based on your score, when you receive feedback, you are <strong>Occasionally</strong> comfortable contesting the feedback received with facts and/or examples.</p>
+                        </div>
+						  <div class="clearfix"></div>
+                      </div>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="clearfix"></div>
+                </div>
+              </div>
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+</div>
+<div class="clearfix"></div>
+<!-- End Thank You Section --> 

@@ -1,0 +1,68 @@
+<div class="grey_content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-sm-12 col-md-offset-2">
+        <h1>License Pack</h1>
+        <div class="white_box">
+			<!-- <p class="padding_15">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing.</p> -->
+			<div class="licencepack">				
+				<div class="row">
+					<div *ngFor="let LicensePack of LicensePackList;let i = index" class="licence_pack_block col-lg-3 col-md-3 col-sm-4 col-xs-12">
+					<div *ngIf="LicensePack.DiscountId>0" class="pack_grid" [ngClass]="{'discount_pack': (LicensePack.discountTypeName=='Percentage' || LicensePack.discountTypeName=='Price')}">
+						<div class="discount_percentage">
+              <span *ngIf="LicensePack.discountTypeName=='Percentage'">{{LicensePack.discountValue | number}}% OFF</span>
+              <span *ngIf="LicensePack.discountTypeName=='Price'">$ {{LicensePack.discountValue  | number}} OFF</span>
+            </div>
+
+            <div class="circle_price" *ngIf="LicensePack.discountTypeName=='Percentage'"><span>{{LicensePack.Price | number}}</span>
+              ${{LicensePack.Price - LicensePack.DiscountPrice}}
+            </div>
+            <div class="circle_price" *ngIf="LicensePack.discountTypeName=='Price'"><span>{{LicensePack.Price | number}}</span>
+              ${{LicensePack.Price - LicensePack.discountValue}}
+            </div>
+            <div class="circle_price" *ngIf="LicensePack.discountTypeName=='License'">
+              ${{LicensePack.Price | number}}
+            </div>
+
+						<div class="pack_title">{{LicensePack.Name}}</div>
+            <p class="padding_15" *ngIf="LicensePack.Validity>0"><strong>Validity: </strong>{{LicensePack.Validity}} Days</p>
+            <p class="padding_15" *ngIf="LicensePack.Validity==0"><strong>Validity: </strong>No Validity</p>
+            <p *ngIf="LicensePack.discountTypeName!='License'" class="padding_15">{{LicensePack.NoOfLicense}} Licences</p>
+            <p *ngIf="LicensePack.discountTypeName=='License'" class="padding_15">{{LicensePack.NoOfLicense}} + {{LicensePack.discountValue  | number}} Licences</p>
+						<button class="back_btn"  (click)="PurchasePack(LicensePack)">Buy Now</button>
+          </div>
+          <div *ngIf="LicensePack.DiscountId==0" class="pack_grid">
+						<!-- <div class="discount_percentage"><span>30% OFF</span></div> -->
+						<div class="circle_price">${{LicensePack.Price | number}}</div>
+						<div class="pack_title">{{LicensePack.Name}}</div>
+            <p class="padding_15" *ngIf="LicensePack.Validity>0"><strong>Validity: </strong>{{LicensePack.Validity}} Days</p>
+            <p class="padding_15" *ngIf="LicensePack.Validity==0"><strong>Validity: </strong>No Validity</p>
+						<p class="padding_15">{{LicensePack.NoOfLicense}} Licences</p>
+						<button class="back_btn"  (click)="PurchasePack(LicensePack)">Buy Now</button>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="LicensePackList.length<=0" class="row text-center">There is no record found</div>
+      <div class="clearfix"></div>
+    </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="clearfix"></div>
+</div>
+<div class="clearfix"></div>
+<!-- End Form Section --> 
+<!-- <div class="modal fade bs-example-modal-sm"  id="Purchase_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+          <div class="modal-body">
+              <p>Are you sure you want to buy this License Pack?</p>
+            </div>
+            <div class="modal-footer text-center">
+              <button type="button" class="next_btn" (click)="PurchaseConfirm(PurchaseEntity)" id="yes_btn"><span>Yes</span></button>
+              <button type="button" class="back_btn" data-dismiss="modal"><span>No</span></button>
+          </div>
+      </div>
+  </div>
+</div> -->

@@ -1,0 +1,818 @@
+
+<!-- <div class="grey_content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-sm-12 col-md-offset-2">
+        <h1>Dashboard</h1>
+        <div class="row">
+			<div class="col-md-6 col-sm-6">
+			<div class="dashboard_box admin_dashbox">
+			  	<div class="red_block"><h4>Invited Clients (By Month)</h4>
+				<div id="clientinvitation_chart" class="chart_block"></div>
+				</div>
+				<div class="white_block">
+					<div class="white_box">
+						<div class="title_block">	
+							<div class="pull-left">
+								<h4>Invited Clients (Recent 5)</h4>
+							</div>
+							<div class="pull-right">
+								<a class="next_btn" href="/client-invitelist"><i class="fa fa-eye"></i>View All</a>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+						<div class="admin_tbl">
+						<div class="table-responsive">
+							<div class="scroll_notification">
+						<table class="table table-hover table-bordered">
+							<thead>
+							  <tr>
+								<!-- <th class="text-center">No.</th> -->
+								<!--<th>Invitation Date</th>
+								<th>Email Address</th>
+								<th>Comapny Name</th>
+								<th>Status</th>
+							  </tr>
+							</thead>
+							<tbody>
+							  <tr *ngFor="let client of clientlist; let i=index;">
+									<!-- <td class="text-center">{{i+1}}</td> -->
+									<!--<td>{{client.CreatedOn | date:'MM/dd/yyyy'}}</td>
+									<td>{{client.EmailAddress}}</td>
+									<td>{{client.CompanyName}}</td>
+									<td><span *ngIf="client.StatusId==0" class="success_status">{{status.Success}}</span>
+										<span *ngIf="client.StatusId==1" class="pending_status">{{status.Pending}}</span>
+										<span *ngIf="client.StatusId==2" class="revoke_status">{{status.Revoke}}</span>
+									</td>
+								</tr>
+								<tr *ngIf="clientlist<=0">
+									<td colspan="5" class="text-center">There is no record found</td>
+								</tr> 
+							</tbody>
+						</table>
+					</div>
+						</div>
+						</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-md-6 col-sm-6">
+			<div class="dashboard_box admin_dashbox">
+			  	<div class="red_block"><h4>Selling Of License Pack (By Month)</h4>
+				<div id="licensepack_chart" class="chart_block"></div>
+				</div>
+				<div class="white_block">
+					<div class="white_box">
+					<div class="title_block">	
+						<div class="pull-left">
+							<h4>License Pack</h4>
+						</div>
+						<div class="pull-right">
+							<a class="next_btn" href="/purchase-report"><i class="fa fa-eye"></i>View All</a>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+					<div class="admin_tbl">
+					<div class="table-responsive">
+							<div class="scroll_notification1">
+					<table class="table table-hover table-bordered">
+							<thead>
+							  <tr>
+								<th class="text-center">No.</th>
+								<th>License Pack</th>
+								<th>License Pack Type</th>
+								<th>Client Name</th>
+								<th>Date of Purchase</th>
+							  </tr>
+							</thead>
+							<tbody>
+								<tr *ngFor="let licenses of clientlicenses; let i=index;">
+									<td class="text-center">{{i+1}}</td>
+									<td>{{licenses.Name}}</td>
+									<td>{{licenses.Value}}</td>
+									<td>{{licenses.FirstName}} {{licenses.LastName}}</td>
+									<td>{{licenses.CreatedOn | date:'MM/dd/yyyy'}}</td>
+								</tr>
+								<tr *ngIf="clientlicenses<=0">
+									<td colspan="5" class="text-center">There is no record found</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+						</div>
+						</div>
+					</div>
+					</div>
+				</div>
+			</div>
+			</div>
+			<div class="clearfix"></div>
+			<div class="row">
+			<div class="col-md-6 col-sm-6">
+				<div class="white_box">
+				<div class="notifications">
+					<div class="title_block">	
+						<div class="pull-left">
+							<h4>Recent Notifications</h4>
+						</div>
+						<div class="pull-right">
+							<ul class="nav nav-pills">
+								<li class="active"><a data-toggle="pill" href="#home">Today</a></li>
+								<li><a data-toggle="pill" href="#menu1">Last Month</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+				<div class="tab-content">
+					<div id="home" class="tab-pane fade in active">
+					<div class="scroll_notification">
+						<div class="notification_red" *ngFor="let notification of notifications; let i=index;">
+							<div class="row">
+								<div class="col-md-3 col-sm-3">
+									<div class="notification_time">
+										<span>{{notification.CreatedOn | date:'h:mm a'}}</span>
+									</div>
+								</div>
+								<div class="col-md-9 col-sm-9">
+									<div class="notification_desc">
+										<p *ngIf="(notification.Module=='Purchase-LicensePack') && (notification.Activity=='PurchaseLicense')">{{notification.Name}} - License Pack Purchased</p>
+										<p *ngIf="(notification.Module=='Client-Registration') && (notification.Activity=='Add')">Registration Completed</p>
+										<span>By {{notification.FirstName}} {{notification.LastName}}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div *ngIf="notifications<=0" class="text-center">There is no record found</div>
+					</div>
+				
+					</div>
+					<div id="menu1" class="tab-pane fade">
+					<div class="scroll_notification2">
+						<div class="notification_black" *ngFor="let notificationMonth of notificationsMonth; let i=index;">
+							<div class="row">
+								<div class="col-md-3 col-sm-3">
+									<div class="notification_time">
+										<span>{{notificationMonth.CreatedOn | date:'MMM d, y'}}</span>
+									</div>
+								</div>
+								<div class="col-md-9 col-sm-9">
+									<div class="notification_desc">
+											<p *ngIf="(notificationMonth.Module=='Purchase-LicensePack') && (notificationMonth.Activity=='PurchaseLicense')">{{notificationMonth.Name}} - License Pack Purchased</p>
+											<p *ngIf="(notificationMonth.Module=='Client-Registration') && (notificationMonth.Activity=='Add')">Registration Completed</p>
+										<span>By {{notificationMonth.FirstName}} {{notificationMonth.LastName}}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div *ngIf="notificationsMonth<=0" class="text-center">There is no record found</div>
+						</div>
+						
+					</div>
+				</div>
+				</div>
+			  </div>		
+			</div> 
+
+			<div class="clearfix"></div>
+        </div>
+      </div>
+    </div>
+		<div class="clearfix"></div>
+		
+-->
+
+<div class="grey_content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-sm-12 col-md-offset-2">
+        <h1>Dashboard</h1>
+        <div class="row">
+		<div class="number_box">
+			<div class="col-md-3 col-sm-6 col-xs-12">
+			<div class="red_box">
+				<div class="white_box">
+					<div class="pull-left">
+						<h4>Client</h4>
+						<!-- <span>Total Client</span> -->
+					</div>
+					<div class="pull-right">
+						<span>100</span>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			</div>
+			<div class="col-md-3 col-sm-6 col-xs-12">
+			<div class="black_box">
+				<div class="white_box">
+					<div class="pull-left">
+						<h4>License Pack</h4>
+						<!-- <span>Total Licenses</span> -->
+					</div>
+					<div class="pull-right">
+						<span>250</span>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			</div>
+			<div class="col-md-3 col-sm-6 col-xs-12">
+			<div class="red_box">
+				<div class="white_box">
+					<div class="pull-left">
+						<h4>Sold License Pack</h4>
+						<!-- <span>Total Sell</span> -->
+					</div>
+					<div class="pull-right">
+						<span>180</span>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			</div>
+			<div class="col-md-3 col-sm-6 col-xs-12">
+			<div class="black_box">
+				<div class="white_box">
+					<div class="pull-left">
+						<h4>Total Earning</h4>
+						<!-- <span>Total Earning</span> -->
+					</div>
+					<div class="pull-right">
+						<span>$200</span>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+			</div>
+			</div>
+			<div class="clearfix"></div>
+			<div class="client_block">
+			<div class="col-md-8 col-sm-7 col-xs-12">
+				<div class="white_box">
+					<div class="topclient_box">
+						<div class="title_block">	
+							<div class="pull-left">
+								<h4>Top Client</h4>
+							</div>
+							<div class="pull-right">
+								<ul class="nav nav-pills">
+									<li class="active"><a data-toggle="pill" href="#home">By Earning</a></li>
+									<li><a data-toggle="pill" href="#menu1">By Licenses</a></li>
+								</ul>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="clearfix"></div>
+						<div class="tab-content">
+							<div id="home" class="tab-pane fade in active">
+								<div class="scroll_topclient">
+									<div class="client_section">
+											<div class="col-md-9 col-sm-8 no-padding">
+												<div class="media">
+													<div class="media-left">
+														<img src="http://learnfeedback.devbyopeneyes.com/assets/images/logo.png" class="media-object" style="width:100px">
+													</div>
+													<div class="media-body">
+													  <h4 class="media-heading">Client Name</h4>
+													  <p>client@email.com</p>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-3 col-sm-4 no-padding">
+												<ul class="list-unstyled">
+													<li><h4>2567</h4><span>License</span></li>
+													<li><h4>276</h4><span>Dollar</span></li>
+												</ul>
+											</div>
+									</div>
+									<div class="clearfix"></div>
+									<div class="client_section">
+											<div class="col-md-9 col-sm-8 no-padding">
+												<div class="media">
+													<div class="media-left">
+														<img src="http://learnfeedback.devbyopeneyes.com/assets/images/logo.png" class="media-object" style="width:100px">
+													</div>
+													<div class="media-body">
+													  <h4 class="media-heading">Client Name</h4>
+													  <p>client@email.com</p>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-3 col-sm-4 no-padding">
+												<ul class="list-unstyled">
+													<li><h4>2456</h4><span>License</span></li>
+													<li><h4>240</h4><span>Dollar</span></li>
+												</ul>
+											</div>
+									</div>
+									<div class="clearfix"></div>
+									<div class="client_section">
+											<div class="col-md-9 col-sm-8 no-padding">
+												<div class="media">
+													<div class="media-left">
+														<img src="http://learnfeedback.devbyopeneyes.com/assets/images/logo.png" class="media-object" style="width:100px">
+													</div>
+													<div class="media-body">
+													  <h4 class="media-heading">Client Name</h4>
+													  <p>client@email.com</p>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-3 col-sm-4 no-padding">
+												<ul class="list-unstyled">
+													<li><h4>2100</h4><span>License</span></li>
+													<li><h4>211</h4><span>Dollar</span></li>
+												</ul>
+											</div>
+									</div>
+									<div class="clearfix"></div>
+									<div class="client_section">
+											<div class="col-md-9 col-sm-8 no-padding">
+												<div class="media">
+													<div class="media-left">
+														<img src="http://learnfeedback.devbyopeneyes.com/assets/images/logo.png" class="media-object" style="width:100px">
+													</div>
+													<div class="media-body">
+													  <h4 class="media-heading">Client Name</h4>
+													  <p>client@email.com</p>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-3 col-sm-4 no-padding">
+												<ul class="list-unstyled">
+													<li><h4>1978</h4><span>License</span></li>
+													<li><h4>198</h4><span>Dollar</span></li>
+												</ul>
+											</div>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+							</div>
+							<div id="menu1" class="tab-pane fade">
+								<div class="scroll_topclient1">
+									<div class="client_section">
+											<div class="col-md-9 col-sm-8 no-padding">
+												<div class="media">
+													<div class="media-left">
+														<img src="http://learnfeedback.devbyopeneyes.com/assets/images/logo.png" class="media-object" style="width:100px">
+													</div>
+													<div class="media-body">
+													  <h4 class="media-heading">Client Name</h4>
+													  <p>client@email.com</p>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-3 col-sm-4 no-padding">
+												<ul class="list-unstyled">
+													<li><h4>1680</h4><span>License</span></li>
+													<li><h4>154</h4><span>Dollar</span></li>
+												</ul>
+											</div>
+									</div>
+									<div class="clearfix"></div>
+									<div class="client_section">
+											<div class="col-md-9 col-sm-8 no-padding">
+												<div class="media">
+													<div class="media-left">
+														<img src="http://learnfeedback.devbyopeneyes.com/assets/images/logo.png" class="media-object" style="width:100px">
+													</div>
+													<div class="media-body">
+													  <h4 class="media-heading">Client Name</h4>
+													  <p>client@email.com</p>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-3 col-sm-4 no-padding">
+												<ul class="list-unstyled">
+													<li><h4>1498</h4><span>License</span></li>
+													<li><h4>146</h4><span>Dollar</span></li>
+												</ul>
+											</div>
+									</div>
+									<div class="clearfix"></div>
+										<div class="client_section">
+											<div class="col-md-9 col-sm-8 no-padding">
+												<div class="media">
+													<div class="media-left">
+														<img src="http://learnfeedback.devbyopeneyes.com/assets/images/logo.png" class="media-object" style="width:100px">
+													</div>
+													<div class="media-body">
+													  <h4 class="media-heading">Client Name</h4>
+													  <p>client@email.com</p>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-3 col-sm-4 no-padding">
+												<ul class="list-unstyled">
+													<li><h4>1200</h4><span>License</span></li>
+													<li><h4>105</h4><span>Dollar</span></li>
+												</ul>
+											</div>
+										</div>
+										<div class="clearfix"></div>
+										<div class="client_section">
+											<div class="col-md-9 col-sm-8 no-padding">
+												<div class="media">
+													<div class="media-left">
+														<img src="http://learnfeedback.devbyopeneyes.com/assets/images/logo.png" class="media-object" style="width:100px">
+													</div>
+													<div class="media-body">
+													  <h4 class="media-heading">Client Name</h4>
+													  <p>client@email.com</p>
+													</div>
+												</div>
+											</div>
+											<div class="col-md-3 col-sm-4 no-padding">
+												<ul class="list-unstyled">
+													<li><h4>1045</h4><span>License</span></li>
+													<li><h4>98</h4><span>Dollar</span></li>
+												</ul>
+											</div>
+									</div>
+									<div class="clearfix"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>		
+			</div>
+			<div class="col-md-4 col-sm-5 col-xs-12">
+				<div class="white_box">
+					<div class="licensepack_box">
+						<div class="title_block">	
+							<div class="pull-left">
+								<h4>Trending License Packs</h4>
+							</div>
+							<div class="pull-right">
+								<select class="">
+									<option value="2018">2018</option>
+									<option value="2019">2017</option>
+									<option value="2020">2016</option>
+									<option value="2021">2015</option>
+								</select>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="clearfix"></div>
+						<div class="licensepack_block">
+							<h4>License Pack Name</h4>
+							<ul class="list-unstyled">
+								<li><h4>Total</h4><span>500</span></li>
+								<li><h4>Earning</h4><span>$50</span></li>
+								<li><h4>License</h4><span>2500</span></li>
+							</ul>
+							<!-- <div class="number"><span>1</span></div> -->
+							<div id="badge-ribbon1"><span>1</span></div>
+						</div>
+						<div class="licensepack_block">
+							<h4>License Pack Name</h4>
+							<ul class="list-unstyled">
+								<li><h4>Total</h4><span>350</span></li>
+								<li><h4>Earning</h4><span>$32</span></li>
+								<li><h4>License</h4><span>1900</span></li>
+							</ul>
+							<!-- <div class="number"><span>2</span></div> -->
+							<div id="badge-ribbon2"><span>2</span></div>
+						</div>
+						<div class="licensepack_block">
+							<h4>License Pack Name</h4>
+							<ul class="list-unstyled">
+								<li><h4>Total</h4><span>248</span></li>
+								<li><h4>Earning</h4><span>$27</span></li>
+								<li><h4>License</h4><span>1400</span></li>
+							</ul>
+							<!-- <div class="number"><span>3</span></div> -->
+							<div id="badge-ribbon3"><span>3</span></div>
+						</div>
+					</div>
+				</div>		
+			</div>
+			</div>
+			<div class="clearfix"></div>
+			<div class="col-md-6 col-sm-6">
+			<div class="dashboard_box admin_dashbox">
+			  	<div class="red_block"><h4>Invited Client (Latest 6 Month)</h4>
+				<div id="clientinvitation_chart" class="chart_block"></div>
+				</div>
+				<div class="white_block">
+					<div class="white_box">
+						<div class="title_block">	
+							<div class="pull-left">
+								<h4>Invited Client (Recent 5)</h4>
+							</div>
+							<div class="pull-right">
+								<a class="next_btn" href="/client-invitelist"><i class="fa fa-eye"></i>View All</a>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="clearfix"></div>
+						<div class="admin_tbl">
+						<div class="table-responsive">
+						<div class="scroll_topclient">
+						<table _ngcontent-c4="" class="table table-hover table-bordered">
+							<thead _ngcontent-c4="">
+							  <tr _ngcontent-c4="">
+								<!-- <th _ngcontent-c4="" class="text-center">No.</th> -->
+								<th _ngcontent-c4="">Invitation Date</th>
+								<th _ngcontent-c4="">Email Address</th>
+								<th _ngcontent-c4="">Comapny Name</th>
+								
+								<th _ngcontent-c4="">Status</th>
+							  </tr>
+							</thead>
+							<tbody _ngcontent-c4="">
+								<tr *ngFor="let client of clientlist; let i=index;">
+									<!-- <td class="text-center">{{i+1}}</td> -->
+									<td>{{client.CreatedOn | date:'MM/dd/yyyy'}}</td>
+									<td>{{client.EmailAddress}}</td>
+									<td>{{client.CompanyName}}</td>
+									<td><span *ngIf="client.StatusId==0" class="success_status">{{status.Success}}</span>
+										<span *ngIf="client.StatusId==1" class="pending_status">{{status.Pending}}</span>
+										<span *ngIf="client.StatusId==2" class="revoke_status">{{status.Revoke}}</span>
+									</td>
+								</tr>
+								<tr *ngIf="clientlist<=0">
+									<td colspan="5" class="text-center">There is no record found</td>
+								</tr> 
+									
+									
+							</tbody>
+						</table>
+						</div>
+						</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			</div>
+			<div class="col-md-6 col-sm-6">
+			<div class="dashboard_box admin_dashbox">
+			  	<div class="red_block"><h4>Sold License Pack (Latest 6 Month)</h4>
+				<div id="licensepack_chart" class="chart_block"></div>
+				</div>
+				<div class="white_block">
+					<div class="white_box">
+					<div class="title_block">	
+						<div class="pull-left">
+							<h4>Sold License Pack (Recent 5)</h4>
+						</div>
+						<div class="pull-right">
+							<a class="next_btn" href="/purchase-report"><i class="fa fa-eye"></i>View All</a>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+					<div class="clearfix"></div>
+					<div class="admin_tbl">
+					<div class="table-responsive">
+					<table _ngcontent-c4="" class="table table-hover table-bordered">
+							<thead _ngcontent-c4="">
+							  <tr _ngcontent-c4="">
+								<!-- <th _ngcontent-c4="" class="text-center">No.</th> -->
+								<th _ngcontent-c4="">Purchased Date</th>
+								<th _ngcontent-c4="">License Pack</th>
+								<th _ngcontent-c4="">License Pack Type</th>
+								<th _ngcontent-c4="">Client Name</th>
+								
+							  </tr>
+							</thead>
+							<tbody _ngcontent-c4="">
+								<tr *ngFor="let licenses of clientlicenses; let i=index;">
+									<!-- <td class="text-center">{{i+1}}</td> -->
+									<td>{{licenses.Name}}</td>
+									<td>{{licenses.Value}}</td>
+									<td>{{licenses.FirstName}} {{licenses.LastName}}</td>
+									<td>{{licenses.CreatedOn | date:'MM/dd/yyyy'}}</td>
+								</tr>
+								<tr *ngIf="clientlicenses<=0">
+									<td colspan="5" class="text-center">There is no record found</td>
+								</tr>
+								
+							</tbody>
+						</table>
+						</div>
+					</div>
+					</div>
+				</div>
+			</div>
+			</div>
+			<div class="clearfix"></div>
+			<div class="col-md-6 col-sm-6">
+			<div class="dashboard_box admin_dashbox">
+			<div class="licensepack_sell">
+			  	<div class="red_block">
+					<div class="pull-left">
+						<h4>License Pack Sell</h4>
+					</div>
+					<div class="pull-right">
+						<select class="">
+							<option value="2018">2018</option>
+							<option value="2019">2017</option>
+							<option value="2020">2016</option>
+							<option value="2021">2015</option>
+						</select>
+					</div>
+					<div class="clearfix"></div>
+					<h1><span>$</span>22,000</h1>
+					<div class="earning_button">
+						<span>Inclusive All Earning</span>
+					</div>
+				</div>
+				<div class="white_block">
+					<div class="white_box">
+						<ul class="nav nav-pills">
+							<li class="active"><a data-toggle="pill" href="#graph1">Quater 1</a></li>
+							<li><a data-toggle="pill" href="#graph2">Quater 2</a></li>
+							<li><a data-toggle="pill" href="#graph3">Quater 3</a></li>
+							<li><a data-toggle="pill" href="#graph4">Quater 4</a></li>
+						</ul>
+						<div class="tab-content">
+							<div id="graph1" class="tab-pane fade in active">
+								<div id="licensepack_sell" class="chart_block"></div>
+							</div>
+							<div id="graph2" class="tab-pane fade">
+								<div id="licensepack_sell1" class="chart_block"></div>
+							</div>
+							<div id="graph3" class="tab-pane fade">	
+								<div id="licensepack_sell2" class="chart_block"></div>
+							</div>
+							<div id="graph4" class="tab-pane fade">
+								<div id="licensepack_sell3" class="chart_block"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+				</div>
+			</div>
+			</div>
+			<div class="col-md-6 col-sm-6">
+				<div class="white_box">
+				<div class="notifications">
+					<div class="title_block">	
+						<div class="pull-left">
+							<h4>Recent Notifications</h4>
+						</div>
+						<div class="pull-right">
+							<ul class="nav nav-pills">
+								<li class="active"><a data-toggle="pill" href="#today">Today</a></li>
+								<li><a data-toggle="pill" href="#month">Last Month</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+				<div class="tab-content">
+					<div id="today" class="tab-pane fade in active">
+					<div class="scroll_notification">
+						<div class="notification_red" *ngFor="let notification of notifications; let i=index;">
+							<div class="row">
+								<div class="col-md-3 col-sm-3">
+									<div class="notification_time">
+										<span>{{notification.CreatedOn | date:'h:mm a'}}</span>
+									</div>
+								</div>
+								<div class="col-md-9 col-sm-9">
+									<div class="notification_desc">
+										<p *ngIf="(notification.Module=='Purchase-LicensePack') && (notification.Activity=='PurchaseLicense')">{{notification.Name}} - License Pack Purchased</p>
+										<p *ngIf="(notification.Module=='Client-Registration') && (notification.Activity=='Add')">Registration Completed</p>
+										<span>By {{notification.FirstName}} {{notification.LastName}}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div *ngIf="notifications<=0" class="text-center">There is no record found</div>
+					</div>
+				
+					</div>
+					<div id="month" class="tab-pane fade">
+					<div class="scroll_notification2">
+						<div class="notification_black" *ngFor="let notificationMonth of notificationsMonth; let i=index;">
+							<div class="row">
+								<div class="col-md-3 col-sm-3">
+									<div class="notification_time">
+										<span>{{notificationMonth.CreatedOn | date:'MMM d, y'}}</span>
+									</div>
+								</div>
+								<div class="col-md-9 col-sm-9">
+									<div class="notification_desc">
+											<p *ngIf="(notificationMonth.Module=='Purchase-LicensePack') && (notificationMonth.Activity=='PurchaseLicense')">{{notificationMonth.Name}} - License Pack Purchased</p>
+											<p *ngIf="(notificationMonth.Module=='Client-Registration') && (notificationMonth.Activity=='Add')">Registration Completed</p>
+										<span>By {{notificationMonth.FirstName}} {{notificationMonth.LastName}}</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div *ngIf="notificationsMonth<=0" class="text-center">There is no record found</div>
+						</div>
+						
+					</div>
+				</div>
+				</div>
+			  </div>		
+			</div>
+			<div class="clearfix"></div>			
+			<!-- <div class="col-md-6 col-sm-6">
+				<div class="white_box">				
+					<div class="overall_answer">
+						<div class="pull-left">
+							<h4>Overall Answer</h4>
+						</div>
+						<div class="pull-right">
+							<select class="">
+								<option value="2018">All</option>
+								<option value="2019">Category1</option>
+								<option value="2020">Category2</option>
+								<option value="2021">Category3</option>
+							</select>
+						</div>
+						<div class="clearfix"></div>
+						<div id="overall_answer" class="chart_block"></div>						
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6 col-sm-6">
+				<div class="white_box">				
+					<div class="feedback_completion">
+						<div class="pull-left">
+							<h4>Feedback Completion Ratio</h4>
+						</div>
+						<div class="pull-right">
+							<select class="">
+								<option value="2018">2018</option>
+								<option value="2019">2019</option>
+								<option value="2020">2020</option>
+								<option value="2021">2021</option>
+							</select>
+						</div>
+						<div class="clearfix"></div>	
+						<div id="feedback_ratio" class="chart_block"></div>						
+					</div>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+			<div class="col-md-12 col-sm-12">
+				<div class="white_box">				
+				<div class="Inquiry">
+			  	<h4>Recent Inquiry</h4>
+				<div class="admin_tbl">
+				<div class="table-responsive">
+				<table class="table table-hover table-bordered">
+                <thead>
+                  <tr>
+                    <th>No.</th>
+					<th>Name</th>
+					<th>Email Address</th>
+					<th>Date</th>
+					<th>Message</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+					<td>Krupali</td>
+                    <td>abc@gmail.com</td>
+                    <td>03/26/2018</td>
+					<td>Lorem ipsum dolor sit amit,consectetur eiusmdd tempor</td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+					<td>Mitesh</td>
+                    <td>xyz@gmail.com</td>
+                    <td>03/24/2018</td>
+					<td>Lorem ipsum dolor sit amit,consectetur eiusmdd tempor</td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+					<td>Uttam</td>
+                    <td>abc.youtsite@gmail.com</td>
+                    <td>03/22/2018</td>
+					<td>Lorem ipsum dolor sit amit,consectetur eiusmdd tempor</td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+					<td>Pooja</td>
+                    <td>xyz.site@gmail.com</td>
+                    <td>03/20/2018</td>
+					<td>Lorem ipsum dolor sit amit,consectetur eiusmdd tempor</td>
+                  </tr>
+                  <tr>
+                    <td>5</td>
+					<td>Vidhi</td>
+                    <td>site@gmail.com</td>
+                    <td>03/18/2018</td>
+					<td>Lorem ipsum dolor sit amit,consectetur eiusmdd tempor</td>
+                  </tr>
+                </tbody>
+              </table>
+			  </div>
+			 </div>
+			 </div>
+			  </div>
+			</div> -->
+			<div class="clearfix"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+</div>

@@ -1,0 +1,119 @@
+<div class="grey_content">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 col-sm-12 col-md-offset-2">
+          <h1>User's Feedback Score</h1>
+            <div class="alert alert-{{globals.type}}" role="alert" *ngIf="globals.msgflag">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+              {{globals.message}}
+            </div>
+          <div class="white_box">
+		  <div class="row">
+              <div class="col-md-6 col-sm-12 col-xs-12">
+                  <div class="form-group">
+                              <label><span>*</span>Select User</label>
+                              <select (change)="change()" #UserId="ngModel" [(ngModel)]="UserEntity.UserId" name="UserId" required>
+                                  <option value="" ngSelected='UserEntity.UserId==""'></option>
+                               
+                                      <option *ngFor="let user of UserList" value="{{user.UserId}}" ngSelected="user.UserId==UserEntity.user">{{user.Name}}</option>
+                                                                    
+                              </select>
+                            </div>
+                            </div>
+							</div>
+                            <div class="clearfix"></div>
+            <table id="list_tables" class="table table-hover table-bordered" style="width:100%">
+              <thead>
+                <tr>
+                  <th>No.</th>
+                  <th>Sub-Category</th>
+                  <th>Category</th>
+                  <th class="text-right">Score</th>
+        
+                </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let user of scoreList; let i = index" >
+                      <td>{{i+1}}</td>
+                      <td>{{user.subCatName}}</td> 
+                      <td>{{user.catName}}</td> 
+                      <td class="text-right">{{user.Score}}</td>
+              
+                    </tr>
+                    <tr *ngIf="nodataflag">
+                      <td colspan="4" class="text-center">This user has not given feedback</td>
+                    </tr> 
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      <div class="clearfix"></div>
+	  
+<!-- <div class="grey_content">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 col-sm-12 col-md-offset-2">
+          <h1>User's Feedback Score</h1>
+          <div class="white_box uscore_tab">
+        <div class="buttons_block">
+  
+       
+       <ul class="nav nav-tabs " role="tablist">
+          <li [ngClass]="{'active':f}" *ngFor="let mcat of scoreList; let i=index; let f=first;">
+            <ng-container *ngIf="mcat.count!=0">
+                <a href="#feedback{{i}}" aria-controls="deliveringfeedback" role="tab" data-toggle="tab">
+                    {{mcat.Name}}</a>
+            </ng-container>         
+            </li>
+      </ul>
+          <div id="buttons" class="pull-right"></div>
+          <div class="clearfix"></div>
+        </div>
+     
+       <div class="tab-content">
+         <ng-container *ngFor="let mcat of scoreList; let i=index; let f=first;">
+          <div role="tabpanel" class="tab-pane" [ngClass]="{'active':f}" id="feedback{{i}}">
+              <table id="list_tables{{i}}" class="table table-hover user_score verti_middle" style="width:100%">
+                <thead> 
+                    <tr>
+                      <th></th>
+                      <th>Question</th>
+                      <th *ngFor="let user of UserList;" class="text-center width_6">{{user.userName}}</th>
+                  
+              <th class="text-center width_6">Average</th>
+              <th class="text-center width_6">Global Average</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      <tr  *ngFor="let cat of mcat.child; let j=index; let f1=first;">
+                          <ng-container *ngIf="cat.count!=0">
+                          <td class="text-right">{{cat.catName}}</td> 
+                          <td>{{cat.queName}}</td>  
+                          <td *ngFor="let user of UserList;" class="text-center width_6" class="text-center width_6">2</td>                 
+                         
+                <td class="text-center width_6">2</td>
+                <td class="text-center width_6">4.5</td>
+              </ng-container>    
+            </tr>
+ 
+            
+                      </tbody>
+                    </table>
+        
+          </div>
+        </ng-container>  
+  
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+        </div>
+      </div> -->
+
+
+  

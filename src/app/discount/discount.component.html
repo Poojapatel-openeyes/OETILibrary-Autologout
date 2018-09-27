@@ -1,0 +1,117 @@
+<div class="grey_content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-sm-12 col-md-offset-2">
+	  <div class="row">
+		<div class="col-md-12 col-sm-12">
+		 <h1 class="pull-left">Discount</h1>
+             <!-- <div class="alert alert-{{globals.type}}" role="alert" *ngIf="globals.msgflag">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+          {{globals.message}}
+          </div> -->
+			<div class="btn-group pull-right add-right">
+                      <a routerLink="/discount/list" class="btn btn-danger btn-add">
+                      <i class="fa fa-reply fa-fw"></i> Back
+                      </a>
+                </div>
+		</div>
+         </div>
+	  
+	  
+        
+        <div class="white_box">
+              
+                <div class="clearfix"></div>
+                          <form role="form" #DiscountForm="ngForm" (ngSubmit)="addDiscount(DiscountForm)">
+          
+                            <div class="row">
+                              <div class="col-md-6 col-sm-12 col-xs-12">
+                                  <div class="form-group">
+                                  <label><span>*</span>Discount Type</label>
+                                 <select class='select-option' required #DiscountType="ngModel" [(ngModel)]="DiscountEntity.DiscountType" name="DiscountType" [ngClass]="{red_border: (DiscountType.dirty && DiscountType.invalid) || (DiscountType.pristine && submitted)}">
+              <option value="" ngSelected='DiscountEntity.DiscountType==""'></option>
+              <ng-container *ngFor="let DType of DiscountTypeList">
+                <option *ngIf="(DType.IsActive==1 && DiscountEntity.DiscountType==0)||((DType.IsActive==1 || DiscountEntity.DiscountType==DType.ConfigurationId) && DiscountEntity.DiscountType>0)" value="{{DType.ConfigurationId}}" ngSelected="DiscountEntity.DiscountType==DType.ConfigurationId">{{DType.DisplayText}}</option>
+              </ng-container> 
+            </select>
+          <span class="error_span"  *ngIf="(DiscountType.dirty && DiscountType.invalid) || (DiscountType.pristine && submitted)"> 
+              <span *ngIf="DiscountType.errors.required || (DiscountType.pristine && submitted)">Please select Discount Type </span>
+            </span>
+                              </div>
+                              </div>
+                              <div class="col-md-6 col-sm-12 col-xs-12">
+                                <div class="form-group">
+                                  <label><span>*</span>Discount Name</label>
+            <input type="text" class="form-control" #Name="ngModel" [(ngModel)]="DiscountEntity.Name" class="form-control" maxlength="50" name="Name" pattern="[a-zA-Z0-9-'&]{2,}"
+            [ngClass]="{red_border: (Name.dirty && Name.invalid) || (Name.pristine && submitted)}" required>
+            <span class="error_span" *ngIf="(Name.dirty && Name.invalid) || (Name.pristine && submitted)"> 
+                <span *ngIf="Name.errors && Name.errors.required">Please enter Discount Name</span>
+              
+                <span *ngIf="Name.errors && Name.errors.pattern">
+                  Please enter valid Discount
+                </span>
+            </span>
+            
+                              </div>
+                              </div>
+          
+          <div class="clearfix"></div>
+
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group">
+                                  <label><span>*</span>Discount Value</label>
+            <input type="text" class="form-control" #Value="ngModel" [(ngModel)]="DiscountEntity.Value" class="form-control" maxlength="8" name="Value" pattern="^\d+(\.\d{1,2})?$" 
+            [ngClass]="{red_border: (Value.dirty && Value.invalid) || (Value.pristine && submitted)}" required>
+            <span class="error_span" *ngIf="(Value.dirty && Value.invalid) || (Value.pristine && submitted)"> 
+            <span *ngIf="Value.errors && Value.errors.required">Please enter Discount Value</span>
+           
+            <span *ngIf="Value.errors && Value.errors.pattern">
+              Please enter valid Discount Value
+            </span>
+          </span>
+                              </div>
+                              </div>
+          
+                              <div class="col-md-6 col-sm-12 col-xs-12">
+                                <div class="form-group1">
+                                  <label><span>*</span>Active?</label>
+                                  
+            <div class="radiobtn_box">
+              <input type="radio"  name="IsActive" id="role1" value="1" #IsActive="ngModel" [(ngModel)]="DiscountEntity.IsActive" required/>
+              <label for="role1">Yes</label>
+            </div>
+            
+            <div class="radiobtn_box" *ngIf="DiscountEntity.DiscountId==0 || DiscountEntity.isdisabled==0"  >
+              <input type="radio"   [disabled]="DiscountEntity.isdisabled>0" name="IsActive" id="role2" value="0" #IsActive="ngModel" [(ngModel)]="DiscountEntity.IsActive" required/>
+              <label for="role2">No </label>
+              </div>
+              <div class="inline_btn tooltip_inline"  data-toggle="tooltip" data-placement="bottom" title="You can’t delete Discount as it has been already used in License Pack" > 
+              <div class="radiobtn_box" *ngIf="DiscountEntity.DiscountId>0 && DiscountEntity.isdisabled>0"    >
+                <input type="radio"    [disabled]="DiscountEntity.isdisabled>0" name="IsActive" id="role2" value="0" #IsActive="ngModel" [(ngModel)]="DiscountEntity.IsActive" required/>
+                 <label for="role2">No </label>
+               
+               </div>
+              </div>
+              </div>
+              </div>
+            
+          
+            <!-- <span class="error_span" *ngIf="(IsActive.dirty && IsActive.invalid) || (IsActive.pristine && submitted)"> 
+              <span *ngIf="IsActive.errors.required || (IsActive.pristine && submitted)">Please select Active Status</span>
+              </span> -->
+
+          <div class="clearfix"></div>
+          <div class="text-center">
+            <button type="submit" [disabled]="btn_disable" class="next_btn"><span>Submit</span></button>
+            <button type="button" *ngIf="DiscountEntity.DiscountId==0" (click)="clearForm(DiscountForm)" class="back_btn"><span>Clear</span></button>
+          </div>
+          </div>
+        </form>
+      </div>
+      </div>
+      <!--</div>-->
+      </div>
+      <!-- End Form Elements -->
+      </div>
+      </div>
+      <div class="clearfix"></div>

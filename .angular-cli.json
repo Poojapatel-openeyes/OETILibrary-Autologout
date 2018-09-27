@@ -1,0 +1,86 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "project": {
+    "name": "lfb"
+  },
+  "apps": [
+    {
+      "root": "src",
+      "outDir": "dist",
+      "assets": [
+        "assets",
+        "favicon.ico"
+      ],
+      "index": "index.html",
+      "main": "main.ts",
+      "polyfills": "polyfills.ts",
+      "test": "test.ts",
+      "tsconfig": "tsconfig.app.json",
+      "testTsconfig": "tsconfig.spec.json",
+      "prefix": "app",
+      "styles": [
+        "styles.css"
+      ],
+      "scripts": ["assets/js/jquery-1.11.3.min.js",
+                  "assets/js/bootstrap.min.js",
+				  "assets/js/bootstrap-tour-standalone.js",
+                  "assets/js/sweetalert2.min.js",
+                  "assets/js/jquery.flexslider.js",
+                  "assets/js/bootstrap-datetimepicker.js",
+                  "assets/js/bootstrap-colorpicker.js",
+                  "assets/js/perfect-scrollbar.js",
+                  "assets/js/jquery.dataTables.min.js",
+                  "assets/js/dataTables.buttons.min.js",
+				  "assets/js/dataTables.responsive.min.js",
+                  "assets/js/buttons.print.min.js",
+                  "assets/js/jszip.min.js",
+                  "assets/js/buttons.html5.min.js",
+                  "assets/js/circle-progress.js",
+                  "assets/js/typeahead.bundle.js", 
+                  "assets/js/amcharts.js",
+				  "assets/js/responsive.min.js",
+                  "assets/js/pie.js",
+                  "assets/js/serial.js",
+                  "assets/js/custom.js",
+				  "assets/js/responsiveamcharts.js",
+                  "assets/js/customInput.js"
+                  
+                    
+        ],
+      "environmentSource": "environments/environment.ts",
+      "environments": {
+        "dev": "environments/environment.ts",
+        "prod": "environments/environment.prod.ts",
+        "local": "environments/environment.local.ts"
+      }
+    }
+  ],
+  "e2e": {
+    "protractor": {
+      "config": "./protractor.conf.js"
+    }
+  },
+  "lint": [
+    {
+      "project": "src/tsconfig.app.json",
+      "exclude": "**/node_modules/**"
+    },
+    {
+      "project": "src/tsconfig.spec.json",
+      "exclude": "**/node_modules/**"
+    },
+    {
+      "project": "e2e/tsconfig.e2e.json",
+      "exclude": "**/node_modules/**"
+    }
+  ],
+  "test": {
+    "karma": {
+      "config": "./karma.conf.js"
+    }
+  },
+  "defaults": {
+    "styleExt": "css",
+    "component": {}
+  }
+}

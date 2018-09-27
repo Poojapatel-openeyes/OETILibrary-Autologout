@@ -1,0 +1,42 @@
+<div class="grey_content">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 col-sm-12 col-md-offset-2">
+          <h1>Activity Log</h1>
+            <div class="alert alert-{{globals.type}}" role="alert" *ngIf="globals.msgflag">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+              {{globals.message}}
+            </div>
+          <div class="white_box">
+            <table id="list_tables" class="table table-hover" style="width:100%">
+              <thead>
+                <tr>
+                  <th class="tbl1_width">No.</th>
+                  <th>User Name</th>
+                  <th>Role Name</th>
+                  <th>Module</th>
+                  <th>Activity</th>
+                  <th>Date Created</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let log of activitylogList; let i = index" >
+                      <td>{{i+1}}</td>
+                      <td>{{log.UserName}}</td> 
+                      <td>{{log.RoleName}}</td>
+                      <td>{{log.Module}}</td>
+                      <td>{{log.Activity}}</td>
+                      <td>{{log.CreatedOn | date:'MM/dd/yyyy H:mm:ss'}}</td>
+                    </tr>
+                    <tr *ngIf="activitylogList.length<=0">
+                      <td colspan="6" class="text-center">There is no record found</td>
+                    </tr> 
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      <div class="clearfix"></div>

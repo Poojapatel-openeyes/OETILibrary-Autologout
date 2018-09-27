@@ -1,0 +1,66 @@
+<!-- <nav class="navbar-default navbar-static-side" > 
+
+        <div class="sidebar-collapse"> 
+
+          <ul class="nav" id="side-menu">
+            <li> 
+       
+              <div class="user-section">
+                
+                <div class="user-info">
+                  <div>{{globals.authData.FirstName}}  {{globals.authData.LastName}}</div>
+                  <div class="user-text-online"> 
+                   
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li (click)="dash()" class="test" id="dash" [ngClass]="{'selected':(globals.currentLink == '/admin')||(globals.currentLink == '/admin/dashboard')}"> <a (click)="menuopen('/admin/dashboard')" style="cursor:pointer;"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a> </li>
+            
+            
+    
+    <li [ngClass]="{'inner_dropdown':menu.check}" id="sel{{i+1}}" class="test {{menu.SelectedClass}}" (click)="addclass(i+1)" *ngFor="let menu of menuList; let i=index"> 
+      <a *ngIf="!menu.check" (click)="menuopen(menu.Url)" style="cursor:pointer;"><i class="{{menu.Icon}}"></i> {{menu.DisplayName}}</a>
+      <a *ngIf="menu.check" ><i class="{{menu.Icon}}"></i> {{menu.DisplayName}}<span class="fa fa-angle-right"></span></a>
+          <ul *ngIf="menu.check" id="nav{{i+1}}" class="nav nav-second-level display_block">
+            <li (click)="addsubclass(i+1,j)" class="test {{child.SelectedClass}}" id=slc{{i+1}}{{j}} *ngFor="let child of menu.child; let j=index">
+              <a (click)="menuopen(child.Url)" style="cursor:pointer;"><i class="{{child.Icon}}"></i> {{child.DisplayName}}</a>
+            </li>
+           </ul>
+     </li> 
+    
+    
+          </ul>
+       
+        </div>
+       
+      </nav>    -->
+
+
+<nav id="sidebar">
+  <div id="container">
+  <div class="content">	
+<button class="mainscreenhamburger" type="button"><i class="fa fa-dedent"></i></button>
+<div class="clearfix"></div>
+	   <button class="hamburger" type="button"><span></span></button>
+	  <div class="ul_block">
+    	<ul class="list-unstyled components">
+
+      <li *ngIf="globals.authData.RoleId==3" (click)="dash()" class="test" id="dash" [ngClass]="{'active':(globals.currentLink == '/client-dashboard')}" data-toggle="tooltip" data-placement="right"  title="Dashboard"> <a (click)="menuopen('/client-dashboard')"><i class="fa fa-dashboard fa-fw"></i> <span>Dashboard</span></a> </li>
+      <li *ngIf="globals.authData.RoleId!=3" (click)="dash()" class="test" id="dash" [ngClass]="{'active':(globals.currentLink == '/dashboard')}"> <a (click)="menuopen('/dashboard')" data-toggle="tooltip" data-placement="right"  title="Dashboard"><i class="fa fa-dashboard fa-fw"></i> <span>Dashboard</span></a> </li>
+
+      <li id="sel{{i+1}}" class="test {{menu.SelectedClass}}" *ngFor="let menu of menuList; let i=index;"> 
+        <a *ngIf="!menu.check" (click)="menuopen(menu.Url)" data-toggle="tooltip" data-placement="right"  title="{{menu.DisplayName}}"><i class="{{menu.Icon}}"></i> <span>{{menu.DisplayName}}</span></a>
+        <span class="tooltip_span_menu" data-toggle="tooltip" data-placement="right" title="{{menu.DisplayName}}"><a *ngIf="menu.check" href="#pageSubmenu{{i}}" data-toggle="collapse"  id="toggle{{i+1}}"  aria-expanded="false" (click)="toogle(i+1)" class="dropdown-toggle collapsed"><i class="{{menu.Icon}}"></i> <span>{{menu.DisplayName}}</span></a></span>
+          <ul *ngIf="menu.check" class="collapse list-unstyled" id="pageSubmenu{{i}}">
+            <li class="test {{child.SelectedClass}}" *ngFor="let child of menu.child; let j=index;">
+              <a (click)="menuopen(child.Url)" data-toggle="tooltip" data-placement="right"  title="{{child.DisplayName}}"><i class="{{child.Icon}}"></i> <span>{{child.DisplayName}}</span></a>
+            </li>
+          </ul>
+      </li> 
+  
+    </ul>
+		</div>
+    </div>
+  </div>
+</nav>

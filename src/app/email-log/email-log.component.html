@@ -1,0 +1,44 @@
+<div class="grey_content">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-sm-12 col-md-offset-2">
+        <h1>Email Log</h1>
+          <div class="alert alert-{{globals.type}}" role="alert" *ngIf="globals.msgflag">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+            {{globals.message}}
+          </div>
+        <div class="white_box">
+          <table id="list_tables" class="table table-hover" style="width:100%">
+            <thead>
+                <tr>
+                  <th class="tbl1_width">No.</th>
+                  <th>From</th>
+                  <th>To</th>
+                  <th>Cc</th>
+                  <th>Bcc</th>
+                  <th>Subject</th>
+                  <th>Date Created</th>
+                </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let log of emaillogList; let i = index" >
+                      <td>{{i+1}}</td>
+                      <td>{{log.From}}</td> 
+                      <td>{{log.To}}</td>
+                      <td>{{log.Cc}}</td>
+                      <td>{{log.Bcc}}</td>
+                      <td>{{log.Subject}}</td>
+                      <td>{{log.CreatedOn | date:'MM/dd/yyyy H:mm:ss'}}</td>
+                    </tr>
+                    <tr *ngIf="emaillogList.length<=0">
+                      <td colspan="7" class="text-center">There is no record found</td>
+                    </tr> 
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+      </div>
+      <div class="clearfix"></div>

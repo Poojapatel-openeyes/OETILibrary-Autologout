@@ -1,0 +1,145 @@
+<div class="grey_content">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 col-sm-12 col-md-offset-2">
+		
+		<div class="row">
+		<div class="col-md-12 col-sm-12">
+		 <h1 class="pull-left">{{header}} Feedback Question</h1>
+            <div class="alert alert-{{globals.type}}" role="alert" *ngIf="globals.msgflag">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+            {{globals.message}}
+            </div>
+			 <div class="btn-group pull-right add-right">
+                        <a routerLink="/question/list" class="btn btn-danger btn-add">
+                        <i class="fa fa-reply fa-fw"></i> Back
+                        </a>
+                  </div>
+		</div>
+         </div>
+		 
+           
+          <div class="white_box">
+                
+                          <form #questionForm="ngForm" (ngSubmit)="addQuestion(questionForm)">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="form-group">
+                                  <label><span class="required">*</span>Feedback Question</label>
+                                  <textarea type="text" class="form-control" #Name="ngModel" [(ngModel)]="questionEntity.Name" name="Name" pattern="[a-zA-Z0-9/',;.&()?\-’\n ]{2,}" [ngClass]="{red_border: (Name.dirty && Name.invalid) || (Name.pristine && submitted)}" required></textarea>
+                                  <span class="error_span" *ngIf="(Name.dirty && Name.invalid) || (Name.pristine && submitted)"> 
+                                    <span *ngIf="Name.errors.required || (Name.pristine && submitted)">Please enter Question</span>
+                                    <span *ngIf="Name.errors && Name.errors.pattern">Please enter valid Question</span>
+                                </span>
+                                </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="col-md-6 col-sm-12 col-xs-12">
+                                    <div class="form-group">
+                                    <label><span class="required">*</span>Sub Category</label>
+                                    <select #FeedbackCategoryId="ngModel" [(ngModel)]="questionEntity.FeedbackCategoryId" name="FeedbackCategoryId" [ngClass]="{red_border: (FeedbackCategoryId.dirty && FeedbackCategoryId.invalid) || (FeedbackCategoryId.pristine && submitted)}" required>
+                                        <option value="" ngSelected='questionEntity.FeedbackCategoryId==""'></option>
+                                        <ng-container *ngFor="let maincat of catList">
+                                            <option *ngIf="(maincat.IsActive==1 && questionEntity.FeedbackCategoryId==0)||((maincat.IsActive==1 || questionEntity.FeedbackCategoryId==maincat.FeedbackCategoryId) && questionEntity.FeedbackCategoryId>0)" value="{{maincat.FeedbackCategoryId}}" ngSelected="questionEntity.FeedbackCategoryId==maincat.FeedbackCategoryId">{{maincat.Name}}</option>
+                                        </ng-container>                                        
+                                    </select>
+                                    <span class="error_span" *ngIf="(FeedbackCategoryId.dirty && FeedbackCategoryId.invalid) || (FeedbackCategoryId.pristine && submitted)"> 
+                                        <span *ngIf="FeedbackCategoryId.errors.required || (FeedbackCategoryId.pristine && submitted)">Please select category</span>
+                                      </span>
+                                  </div>
+                                  </div>
+                                
+                                  <div class="col-md-3 col-sm-12 col-xs-12">
+                                    <div class="form-group1">
+            <label><span class="required">*</span>Active?</label>
+            <div class="radiobtn_box"  >
+              <input type="radio"  name="IsActive" id="role1" value="1" #IsActive="ngModel" [(ngModel)]="questionEntity.IsActive" required/>
+              <label for="role1">Yes</label>
+            </div>
+                 <div class="radiobtn_box" *ngIf="questionEntity.FeedbackQuestionId==0 || questionEntity.isdisabled==0"  >
+                <input type="radio"   [disabled]="questionEntity.isdisabled>0" name="IsActive" id="role2" value="0" #IsActive="ngModel" [(ngModel)]="questionEntity.IsActive" required/>
+                <label for="role2">No </label>
+              </div>
+              <div class="inline_btn tooltip_inline"  data-toggle="tooltip" data-placement="bottom" title="You can’t deactivate Question as it has been already used in Feedback Question" > 
+                <div class="radiobtn_box" *ngIf="questionEntity.FeedbackQuestionId>0 && questionEntity.isdisabled>0"    >
+                    <input type="radio"    [disabled]="questionEntity.isdisabled>0" name="IsActive" id="role2" value="0" #IsActive="ngModel" [(ngModel)]="questionEntity.IsActive" required/>
+                   <label for="role2">No </label>
+               
+                 </div>
+              </div>
+            
+            <span class="error_span" *ngIf="(IsActive.dirty && IsActive.invalid) || (IsActive.pristine && submitted)"> 
+                <span *ngIf="IsActive.errors.required || (IsActive.pristine && submitted)">Please select Active Status</span>
+              </span>
+
+              </div>
+              </div>
+             
+
+              <div class="col-md-3 col-sm-12 col-xs-12">
+              <div class="form-group1">
+            <label><span class="required">*</span>Custom Answer?</label>
+            <div class="radiobtn_box"  >
+            <input type="radio"  name="CustomAnswer" id="role3" value="1" #CustomAnswer="ngModel" [(ngModel)]="questionEntity.CustomAnswer" required/>
+            <label for="role3">Yes</label>
+            </div>
+            <div class="radiobtn_box"  >
+              <input type="radio"  name="CustomAnswer" id="role4" value="0" #CustomAnswer="ngModel" [(ngModel)]="questionEntity.CustomAnswer" required/>
+              <label for="role4">No</label>
+              </div>
+            </div>
+            </div>
+            <div class="clearfix"></div>
+
+              <div class="col-md-6 col-sm-12 col-xs-12" *ngIf="questionEntity.CustomAnswer==1">
+                <div class="form-group1">
+                <label><span class="required">*</span>Select Custom Answer</label>
+                <select multiple #FeedbackAnswerId="ngModel" [(ngModel)]="questionEntity.FeedbackAnswerId" name="FeedbackAnswerId" [ngClass]="{red_border: (FeedbackAnswerId.dirty && FeedbackAnswerId.invalid) || (FeedbackAnswerId.pristine && submitted)}" required>
+                    <option value="" ngSelected='questionEntity.FeedbackAnswerId==""'></option>
+                    <ng-container *ngFor="let ans of answerList">
+                        <option value="{{ans.FeedbackAnswerId}}" ngSelected="questionEntity.FeedbackAnswerId==ans.FeedbackAnswerId">{{ans.Name}}</option>
+                    </ng-container>                                        
+                </select>
+                <span class="error_span" *ngIf="(FeedbackAnswerId.dirty && FeedbackAnswerId.invalid) || (FeedbackAnswerId.pristine && submitted)"> 
+                    <span *ngIf="FeedbackAnswerId.errors.required || (FeedbackAnswerId.pristine && submitted)">Please select custom answer</span>
+                  </span>
+					
+					<div class="check_box">
+                      <input type="checkbox" name="Check" id="Check1" value="Check1">
+                      <label for="Check1" title="Check1" class="checkboxbtn_label">Role 1</label>
+                    </div>
+                    <div class="check_box">
+                      <input type="checkbox" name="Check" id="Check2" value="Check2">
+                      <label for="Check2" title="Check2" class="checkboxbtn_label">Role 2 </label>
+                    </div>
+                    <div class="check_box">
+                      <input type="checkbox" name="Check" id="Check3" value="Check3">
+                      <label for="Check3" title="Check3" class="checkboxbtn_label">Role 3</label>
+                    </div>
+					 <div class="check_box">
+                      <input type="checkbox" name="Check" id="Check4" value="Check4">
+                      <label for="Check4" title="Check4" class="checkboxbtn_label">Role 4</label>
+                    </div>
+					 <div class="check_box">
+                      <input type="checkbox" name="Check" id="Check5" value="Check5">
+                      <label for="Check5" title="Check5" class="checkboxbtn_label">Role 5</label>
+                    </div>
+              </div>
+              </div>
+
+          <div class="clearfix"></div>
+          <div class="text-center">
+            <button type="submit" [disabled]="btn_disable" class="next_btn"><span>Submit</span></button>
+            <button type="button" *ngIf="questionEntity.FeedbackQuestionId==0" (click)="clearForm(questionForm)" class="back_btn"><span>Clear</span></button>
+            
+        </div>
+    </div>
+</form>
+</div>
+</div>
+<!--</div>-->
+</div>
+<!-- End Form Elements -->
+</div>
+</div>
+<div class="clearfix"></div>

@@ -1,0 +1,120 @@
+<div class="grey_content">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 col-sm-12 col-md-offset-2">
+          <h1>Invited User</h1>
+            <div class="alert alert-{{globals.type}}" role="alert" *ngIf="globals.msgflag">
+              <button type="button" class="close" data-dismiss="alert" aria-label="Close">  </button>
+              {{globals.message}}
+            </div>
+          <div class="white_box">
+        <div class="buttons_block">
+          <a routerLink="/user-invite" class="next_btn"><i class="fa fa-plus"></i>Invite User</a>
+          <div id="buttons" class="pull-right"></div>
+          <div class="clearfix"></div>
+        </div>
+            <table id="list_tables" class="table table-hover" style="width:100%">
+              <thead>
+                <tr>
+                  <th class="tbl1_width">No</th>
+                  <th *ngIf="globals.authData.RoleId!=3">Client Name</th>
+                  <th>User Name</th>
+                  <th>Email</th>
+                  <th>Invitation Date</th>
+                  <th>Status</th>
+                  <th class="tbl_width text-center">Active?</th>                  
+                  <th *ngIf="permissionEntity.AddEdit==1 || permissionEntity.Delete==1" class="print_none text-center">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+               <tr *ngFor="let Invitation of InvitationList;let i = index;">
+                  <td>{{i+1}}</td>
+                  <td *ngIf="globals.authData.RoleId!=3">{{Invitation.ClientName}}</td>
+                  <td>{{Invitation.Name}}</td>
+                  <td>{{Invitation.EmailAddress}}</td>
+                  <td>{{Invitation.CreatedOn | date : 'MM/dd/yyyy'}}</td>
+                  <td *ngIf="Invitation.StatusId=='1'"><span class="pending_status">{{Status.Pending}}</span></td>
+                  <td *ngIf="Invitation.StatusId=='0'"><span class="success_status">{{Status.Success}}</span></td>
+				          <td *ngIf="Invitation.StatusId=='2'"><span class="revoke_status">{{Status.Revoke}}</span></td>
+                  <td class="text-center"><div *ngIf="Invitation.StatusId=='0'" class="activeyes_box" data-toggle="tooltip" data-placement="top" [attr.title]="Invitation.IsActive==1 ? 'Active' : 'Deactive'">
+                    <input type="checkbox" name="active1" id="active{{i}}" (change)="isActiveChange(Invitation,i)" [checked]="Invitation.IsActive==1" value="Yes" >
+                    <label for="active{{i}}"></label>
+                    </div></td>         
+
+                   <td class="text-center" *ngIf="permissionEntity.AddEdit==1 || permissionEntity.Delete==1" class="print_none text-center">
+                    <button *ngIf="Invitation.StatusId==1" type="button" class="back_btn" data-tooltip="Revoke" 
+					(click)="deleteInvitation(Invitation)" >
+                    Revoke</button>
+					  <button *ngIf="Invitation.StatusId!=0" type="button" class="next_btn" data-tooltip="Re-Invite"
+					(click)="ReInviteInvitation(Invitation)" >
+                    Re-Invite</button>
+					
+                  </td>
+                </tr>
+                <tr *ngIf="InvitationList==0">
+                  <td colspan="8" class="text-center">There is no record found</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="clearfix"></div>
+
+  <!-- <div class="modal fade bs-example-modal-sm" data-backdrop="static" data-keyboard="false" id="Delete_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+          <div class="modal-body">
+              <p>Are you sure you want to revoke this Email?</p>
+            </div>
+            <div class="modal-footer text-center">
+              <button type="button" class="next_btn" (click)="deleteConfirm(deleteEntity)" id="yes_btn"><span>Yes</span></button>
+              <button type="button" class="back_btn" data-dismiss="modal"><span>No</span></button>
+          </div>
+      </div>
+  </div>
+</div> -->
+
+  <div class="modal fade bs-example-modal-sm"  id="ReInvite_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+          <div  class="modal-body">
+            
+              <!-- <p>Are You Sure You Want To Re-Invite This Email?</p> -->
+              <form #InvitationForm="ngForm" (ngSubmit)="ReInviteConfirm(InvitationForm)">
+                <div class="row">
+                  <div class="col-md-12 col-sm-12" *ngIf = "globals.authData.RoleId==3">
+                    <div class="form-group">
+                    <label><span>*</span>License Pack</label>
+                   <select class='select-option' required #CLId="ngModel" [(ngModel)]="provideLicenseEntity.CLId" name="CLId" [ngClass]="{red_border: (CLId.dirty && CLId.invalid) || (CLId.pristine && submitted)}">
+<option value="" ngSelected='provideLicenseEntity.CLId==""'></option>
+<ng-container *ngFor="let license of LicenseList">
+  <option *ngIf = "((license.ExpiredDate | date : 'MM/dd/yyyy') > (TodaysDate | date : 'MM/dd/yyyy')) || ((license.ExpiredDate | date : 'MM/dd/yyyy') == (TodaysDate | date : 'MM/dd/yyyy'))" value="{{license.CLId}}">{{license.Name}}</option>
+</ng-container> 
+</select>
+<span class="error_span"  *ngIf="(CLId.dirty && CLId.invalid) || (CLId.pristine && submitted)"> 
+<span *ngIf="CLId.errors.required || (CLId.pristine && submitted)">Please select License Pack </span>
+</span>
+                </div>
+                </div>
+                <p style="padding-left: 20px;padding-bottom: 20px;" *ngIf = "globals.authData.RoleId!=3">Are you sure you want to reinvite this Email?</p>
+            <div class="clearfix"></div>
+            <div class="text-center">
+                <button *ngIf = "globals.authData.RoleId!=3" type="submit" [disabled]="btn_disable" class="next_btn"><span>Yes</span></button>
+              <button *ngIf = "globals.authData.RoleId==3" type="submit" [disabled]="btn_disable" class="next_btn"><span>Submit</span></button>
+              <button type="button" class="back_btn" (click)="noForm(InvitationForm)" data-dismiss="modal"><span>No</span></button>
+            </div>
+                      </div>
+                            </form>
+            </div>
+
+            <!-- <div class="modal-footer text-center">
+              <button type="button" class="next_btn" (click)="ReInviteConfirm(ReInviteEntity)" id="yes_btn"><span>Yes</span></button>
+              <button type="button" class="back_btn" data-dismiss="modal"><span>No</span></button>
+          </div> -->
+      </div>
+  </div>
+</div>

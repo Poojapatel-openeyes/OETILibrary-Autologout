@@ -1,0 +1,161 @@
+/* You can add global styles to this file, and also import other style files */
+
+.main_circle {
+    min-height : 200px;
+}
+
+
+
+.red_border {
+	border-color : red!important;
+ }
+
+#chartdiv {
+	width: 100%;
+	height: 500px;
+	}	
+	
+ .txtupper {
+	text-transform: uppercase;
+  }
+  
+ #ReInvite_Modal .modal-dialog {
+	margin: 20% auto;
+	width: 400px;
+  }
+a.disabled {
+   pointer-events: auto;
+   cursor: not-allowed;
+   border-color : transparent!important;
+}
+
+#Sure_Modal .modal-dialog {
+	margin: 20% auto;
+	width: 400px;
+}
+
+.loader_new {
+	background: rgba(0, 0, 0,0.7);
+	opacity: 1;
+	width: 100%;
+	z-index: 9999;
+	height: 100%;
+	left: 0px;
+	top: 0px;
+	position: fixed;
+}
+:root {
+	--theme-color: #B01116;
+  }
+@keyframes lds-double-ring {
+  0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes lds-double-ring {
+  0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes lds-double-ring_reverse {
+  0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+  100% {
+    -webkit-transform: rotate(-360deg);
+    transform: rotate(-360deg);
+  }
+}
+@-webkit-keyframes lds-double-ring_reverse {
+  0% {
+    -webkit-transform: rotate(0);
+    transform: rotate(0);
+  }
+  100% {
+    -webkit-transform: rotate(-360deg);
+    transform: rotate(-360deg);
+  }
+}
+.lds-double-ring {
+  position: relative; z-index:9999999;
+}
+.lds-double-ring div {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  border-radius: 50%; z-index:9999999;
+  border: 8px solid #000;
+  border-color: var(--theme-color) transparent var(--theme-color) transparent;
+  -webkit-animation: lds-double-ring 1.7s linear infinite;
+  animation: lds-double-ring 1.7s linear infinite;
+}
+.lds-double-ring div:nth-child(2) {
+  width: 70%;
+  height: 70%;
+  top: 13px;
+  left:13px; z-index:9999999;
+  border-color: transparent #fff transparent #fff;
+  -webkit-animation: lds-double-ring_reverse 1.7s linear infinite;
+  animation: lds-double-ring_reverse 1.7s linear infinite;
+}
+.lds-double-ring {
+  width: 85px !important;
+  height: 85px !important; z-index:9999999;
+  -webkit-transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
+  transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
+}
+
+.default {
+    background-color: #05e42a;
+    width: 5px;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    height: 100%;
+}
+.Development
+{
+    background-color:darkred;
+    width: 5px;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    height: 100%;
+}
+.QA
+{
+    background-color:darkgoldenrod;
+    width: 5px;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    height: 100%;
+}
+
+
+.error_span {
+    color: red;
+    font-size: 12px;
+    font-weight: normal;
+    font-family: "GothamNarrow-Book";
+    line-height: 11px;
+}
+.tooltip_inline{display: inline-block;}
+.tooltip_inline button[disabled]{cursor: default; opacity: 1; pointer-events: none;}
+/* .error_span{color:red; font-size:12px; font-weight:normal; font-family: "Gotham-Book"; line-height:11px;} */

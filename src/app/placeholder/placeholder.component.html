@@ -1,0 +1,99 @@
+<div class="grey_content">
+    <div class="container">
+      <div class="row">
+      <div class="col-md-10 col-sm-12 col-md-offset-2">
+	  <div class="row">
+		<div class="col-md-12 col-sm-12">
+		 <h1 class="pull-left">{{header}} Placeholder</h1>
+           
+			 <div class="btn-group pull-right add-right">
+              <a routerLink="/placeholder/list" class="btn btn-danger btn-add">
+              <i class="fa fa-reply fa-fw"></i> Back
+              </a>
+            </div>
+		</div>
+         </div>
+	  
+	  
+	  
+        <!-- <div class="alert alert-{{globals.type}}" role="alert" *ngIf="globals.msgflag">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+        {{globals.message}}
+        </div> -->
+        <div class="white_box">
+         
+            <div class="clearfix"></div>
+                          <form #placeholderForm="ngForm" (ngSubmit)="addPlaceholder(placeholderForm)">
+          
+                            <div class="row">
+                                <div class="col-md-6 col-sm-12 col-xs-12">
+                                  <div class="form-group">
+            <label><span>*</span>Select Table</label>
+            <select (change)="getColumnList(placeholderForm)" #TableId="ngModel" [(ngModel)]="placeholderEntity.TableId" name="TableId" [ngClass]="{red_border: (TableId.dirty && TableId.invalid) || (TableId.pristine && submitted)}" required>
+                <option value="" ngSelected='placeholderEntity.TableId==""'></option>
+                <option *ngFor="let table of tableList" value="{{table.TableId}}" ngSelected="placeholderEntity.TableId==table.TableId">{{table.DisplayName}}</option>
+            </select>
+            <span class="error_span" *ngIf="(TableId.dirty && TableId.invalid) || (TableId.pristine && submitted)"> 
+                <span *ngIf="TableId.errors.required || (TableId.pristine && submitted)">Please Select Table</span>
+                </span>
+        </div>
+        </div>
+          
+        <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group">
+                <label><span>*</span>Select Field</label>
+                <select #ColumnId="ngModel" [(ngModel)]="placeholderEntity.ColumnId" name="ColumnId" [ngClass]="{red_border: (ColumnId.dirty && ColumnId.invalid) || (ColumnId.pristine && submitted)}" required>
+                    <option value="" ngSelected='placeholderEntity.ColumnId==""'></option>
+                    <option *ngFor="let column of columnList" value="{{column.ColumnId}}" ngSelected="placeholderEntity.ColumnId==column.ColumnId">{{column.DisplayName}}</option>
+                </select>
+                <span class="error_span" *ngIf="(ColumnId.dirty && ColumnId.invalid) || (ColumnId.pristine && submitted)"> 
+                    <span *ngIf="ColumnId.errors.required || (ColumnId.pristine && submitted)">Please Select Field</span>
+                    </span>
+            </div>
+            </div>
+          
+          <div class="clearfix"></div>
+          <div class="col-md-6 col-sm-12 col-xs-12">
+            <div class="form-group">
+                <label><span>*</span>Placeholder Name</label>
+                <input type="text" class="form-control" #PlaceholderName="ngModel" [(ngModel)]="placeholderEntity.PlaceholderName" name="PlaceholderName" pattern="[a-zA-Z0-9\-'_ ]{1,100}" [ngClass]="{red_border: (PlaceholderName.dirty && PlaceholderName.invalid) || (PlaceholderName.pristine && submitted)}" required/>  
+                <span class="error_span" *ngIf="(PlaceholderName.dirty && PlaceholderName.invalid) || (PlaceholderName.pristine && submitted)"> 
+                <span *ngIf="PlaceholderName.errors.required || (PlaceholderName.pristine && submitted)">Please enter Placeholder Name</span>
+                <span *ngIf="PlaceholderName.errors && PlaceholderName.errors.pattern">Please enter valid Placeholder Name</span>
+            </span>
+            </div>
+            </div>
+          
+            <div class="col-md-6 col-sm-12 col-xs-12">
+                <div class="form-group1">
+                <label><span>*</span>Active?</label>
+                  
+              <div class="radiobtn_box">
+                <input type="radio"  name="IsActive" id="role1" value="1" #IsActive="ngModel" [(ngModel)]="placeholderEntity.IsActive" required/>
+                <label for="role1">Yes</label>
+              </div>
+              <div class="radiobtn_box">
+                <input type="radio" name="IsActive" id="role2" value="0" #IsActive="ngModel" [(ngModel)]="placeholderEntity.IsActive" required/>
+                <label for="role2">No </label>
+              </div><br>
+              <span class="error_span" *ngIf="(IsActive.dirty && IsActive.invalid) || (IsActive.pristine && submitted)"> 
+                  <span *ngIf="IsActive.errors.required || (IsActive.pristine && submitted)">Please select active status</span>
+                </span>
+  
+                </div>
+                </div>
+          <div class="clearfix"></div>
+          <div class="text-center">
+                <button type="submit" [disabled]="btn_disable" class="next_btn"><span>Submit</span></button>
+                <button type="button" *ngIf="placeholderEntity.PlaceholderId==0" (click)="clearForm(placeholderForm)" class="back_btn"><span>Clear</span></button>
+          </div>
+        </div>
+    </form>
+</div>
+</div>
+<!--</div>-->
+</div>
+<!-- End Form Elements -->
+</div>
+</div>
+<div class="clearfix"></div>

@@ -1,0 +1,140 @@
+<div class="grey_content">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 col-sm-12 col-md-offset-2">
+		<div class="row">
+			<div class="col-md-12 col-sm-12">
+			 <h1 class="pull-left">Invite Client</h1>
+				
+				<div class="btn-group pull-right add-right">
+						  <a routerLink="/client-invitelist" class="btn btn-danger btn-add">
+						  <i class="fa fa-reply fa-fw"></i> Back
+						  </a>
+				</div>
+      </div>
+      
+    </div> 
+    <div class="alert alert-{{globals.type}}" role="alert" *ngIf="globals.msgflag">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"> </button>
+      <span [innerHTML]="globals.message"></span>
+      </div>           
+		<div class="white_box">                  
+                  <div class="clearfix"></div>
+                    <form #InvitationForm="ngForm" (ngSubmit)="addInvitation(InvitationForm)">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                              <label><span>*</span>First Name </label>
+                              <input type="text" class="form-control" #FirstName="ngModel" [(ngModel)]="InvitationEntity.FirstName" name="FirstName" pattern="[a-zA-Z'\-&\ ]{2,100}" [ngClass]="{red_border: (FirstName.dirty && FirstName.invalid) || (FirstName.pristine && submitted)}" required/>  
+                          <span class="error_span" *ngIf="(FirstName.dirty && FirstName.invalid) || (FirstName.pristine && submitted)"> 
+                          <span *ngIf="FirstName.errors.required || (FirstName.pristine && submitted)">Please enter your First Name</span>
+                          <span *ngIf="FirstName.errors && FirstName.errors.pattern">Please enter your valid First Name</span>
+                        </span>
+                            </div>
+                          </div>
+                          <div class="col-md-6 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                              <label><span>*</span>Last Name </label>
+                              <input type="text" class="form-control" #LastName="ngModel" [(ngModel)]="InvitationEntity.LastName" name="LastName" pattern="[a-zA-Z'\-&\ ]{2,100}"
+                              [ngClass]="{red_border: (LastName.dirty && LastName.invalid) || (LastName.pristine && submitted)}" required/>  
+                                    <span class="error_span" *ngIf="(LastName.dirty && LastName.invalid) || (LastName.pristine && submitted)"> 
+                                    <span *ngIf="LastName.errors.required || (LastName.pristine && submitted)">Please enter your Last Name</span>
+                                    <span *ngIf="LastName.errors && LastName.errors.pattern">Please enter your valid Last Name</span>
+                                  </span>
+                            </div>
+                          </div>
+						  <div class="clearfix"></div>
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+						<div class="form-group">
+                          <label><span>*</span>Email Address</label>
+                          <input type="Email" class="form-control" #EmailAddress="ngModel" email 
+                          pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" maxlength="100" [(ngModel)]="InvitationEntity.EmailAddress" name="EmailAddress" [ngClass]="{red_border: (EmailAddress.dirty && EmailAddress.invalid) || (EmailAddress.pristine && submitted)}" required/>
+							<span class="error_span" *ngIf="(EmailAddress.dirty && EmailAddress.invalid) || (EmailAddress.pristine && submitted)">
+                                      
+                                      <span *ngIf="EmailAddress.errors && EmailAddress.errors.required">
+                                        Please enter Email Address
+                                      </span>
+                                      
+                                      <span *ngIf="EmailAddress.errors && EmailAddress.errors.pattern">
+                                        Please input valid Email Address
+                                      </span>                                  
+							</span> 
+						</div> 
+                          
+                      </div>
+                      <div class="col-md-6 col-sm-12 col-xs-12">
+                        <div class="form-group">
+                          <label><span>*</span>Company Name </label>
+                          <input type="text" class="form-control" #CompanyName="ngModel" [(ngModel)]="InvitationEntity.CompanyName" name="CompanyName" pattern="[a-zA-Z'.$\ ]{2,100}" [ngClass]="{red_border: (CompanyName.dirty && CompanyName.invalid) || (CompanyName.pristine && submitted)}" required/>  
+                      <span class="error_span" *ngIf="(CompanyName.dirty && CompanyName.invalid) || (CompanyName.pristine && submitted)"> 
+                      <span *ngIf="CompanyName.errors.required || (CompanyName.pristine && submitted)">Please enter your Company Name</span>
+                      <span *ngIf="CompanyName.errors && CompanyName.errors.pattern">Please enter your valid Company Name</span>
+                    </span>
+                        </div>
+                      </div>
+					  <div class="clearfix"></div>
+                      <div class="col-md-6 col-sm-12 col-xs-12">
+                        <div class="form-group">
+                          <label><span>*</span>Company Email Address</label>
+                          <input type="Email" class="form-control" #CompanyEmail="ngModel" email 
+                          pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" maxlength="100" [(ngModel)]="InvitationEntity.CompanyEmail" name="CompanyEmail" [ngClass]="{red_border: (CompanyEmail.dirty && CompanyEmail.invalid) || (CompanyEmail.pristine && submitted)}" required/>
+                          <span class="error_span" *ngIf="(CompanyEmail.dirty && CompanyEmail.invalid) || (CompanyEmail.pristine && submitted)">
+                                      
+                                      <span *ngIf="CompanyEmail.errors && CompanyEmail.errors.required">
+                                        Please enter Company Email Address
+                                      </span>
+                                      
+                                      <span *ngIf="CompanyEmail.errors && CompanyEmail.errors.pattern">
+                                        Please input valid Company Email Address
+                                      </span>
+                                  
+                            </span> 
+                        </div>
+                      </div>
+                      <div class="col-md-6 col-sm-12 col-xs-12">
+                          <div class="form-group">
+                            <label><span>*</span>Phone Number</label>
+                            <input type="text" class="form-control" #ContactNumber="ngModel" name="ContactNumber" pattern="[0-9\-.()+\s]{3,13}" maxlength="13"
+                              [(ngModel)]="InvitationEntity.ContactNumber" [ngClass]="{red_border: (ContactNumber.dirty && ContactNumber.invalid) || (ContactNumber.pristine && submitted)}"  required/>
+                              <span class="error_span" *ngIf="(ContactNumber.dirty && ContactNumber.invalid) || (ContactNumber.pristine && submitted)"> 
+                                <span *ngIf="ContactNumber.errors.required || (ContactNumber.pristine && submitted)">Please enter your Phone Number</span>
+                                <span *ngIf="ContactNumber.errors && ContactNumber.errors.pattern">Please enter your valid Phone Number</span>
+                              </span>
+                          </div>
+                        </div>
+						<div class="clearfix"></div>
+                        <div class="col-md-6 col-sm-12 col-xs-12">
+                            <div class="form-group">
+                              <label><span>*</span>Website </label>
+                              <input type="url" class="form-control" pattern="[a-zA-Z0-9.-_]{1,}[.]{1}[a-zA-Z]{2,}" #URL="ngModel" [(ngModel)]="InvitationEntity.URL" name="URL" [ngClass]="{red_border: (URL.dirty && URL.invalid) || (URL.pristine && submitted)}" required/> 
+                                <span class="error_span" *ngIf="(URL.dirty && URL.invalid) || (URL.pristine && submitted)"> 
+                                  <span *ngIf="URL.errors.required || (URL.pristine && submitted)">Please enter your Website URL</span>
+                                  <span *ngIf="URL.errors && URL.errors.pattern">Please enter your valid Website URL</span>
+                                </span>
+                            </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12 col-xs-12">
+                              <div class="form-group">
+                                <label><span>*</span>Workspace URL</label>
+                                <input type="text" class="form-control" #WorkspaceURL="ngModel" [(ngModel)]="InvitationEntity.WorkspaceURL" name="WorkspaceURL" pattern="[a-zA-Z0-9'.$\-_]{2,50}" [ngClass]="{red_border: (WorkspaceURL.dirty && WorkspaceURL.invalid) || (WorkspaceURL.pristine && submitted)}" required/>  
+                            <span class="error_span" *ngIf="(WorkspaceURL.dirty && WorkspaceURL.invalid) || (WorkspaceURL.pristine && submitted)"> 
+                            <span *ngIf="WorkspaceURL.errors.required || (WorkspaceURL.pristine && submitted)">Please enter your Workspace URL</span>
+                            <span *ngIf="WorkspaceURL.errors && WorkspaceURL.errors.pattern">Please enter your valid Workspace URL</span>
+                          </span>
+                              </div>
+                            </div>
+          <div class="clearfix"></div>
+          <div class="text-center">
+            <button type="submit" [disabled]="btn_disable" class="next_btn"><span>Submit</span></button>
+            <button type="button" (click)="clearForm(InvitationForm)" class="back_btn"><span>Clear</span></button>
+          </div>
+                    </div>
+                          </form>
+                      </div>
+                  </div>
+              <!--</div>-->
+          </div>
+           <!-- End Form Elements -->
+      </div>
+  </div>
+  <div class="clearfix"></div>
